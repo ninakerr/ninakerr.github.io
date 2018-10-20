@@ -1,4 +1,5 @@
-/*!
+/*!<!-- Thanks to
+https://github.com/RyanFitzgerald/devportfolio for the HTML, CSS, and JS templates for this website -->
     Title: Dev Portfolio Template
     Version: 1.2.1
     Last Change: 08/27/2017

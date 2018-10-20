@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Google Maps Demo</title>
+    <style>
+    #map {
+        height: 100%;
+      }
+ 
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+	</style>
+
+</head>
+
+
+<body>
+
+	<h3> My Google Map Demo</h3>
+	<div id="map"></div>
+	<script async defer 
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOB1n4LnUOQ1d4M8bcB21_bXUMGpXsHqs&callback=initMap">
+	</script>
+
+	<script>
+  function initMap() {
+  	var myLatLng = {lat: 47.2446, lng: -122.4376};
+  	  	 
+  var map = new google.maps.Map(document.getElementById('map'), {
+          center: myLatLng,
+          zoom: 14,
+          streetViewControl: false,
+          styles: [
+            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+            {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+            {
+              featureType: 'administrative.locality',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'poi',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'geometry',
+              stylers: [{color: '#263c3f'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#6b9a76'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry',
+              stylers: [{color: '#38414e'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#212a37'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#9ca5b3'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry',
+              stylers: [{color: '#746855'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#1f2835'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#f3d19c'}]
+            },
+            {
+              featureType: 'transit',
+              elementType: 'geometry',
+              stylers: [{color: '#2f3948'}]
+            },
+            {
+              featureType: 'transit.station',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'geometry',
+              stylers: [{color: '#17263c'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#515c6d'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.stroke',
+              stylers: [{color: '#17263c'}]
+            }
+          ]
+        });
+      var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map
+   
+  });
+      var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">UW Tacoma</h1>'+
+            '<div id="bodyContent">'+
+            '<p><b>The University of Washington Tacoma</b> (UW Tacoma) is a four-year undergraduate, graduate, and post-graduate campus of the University of Washington. It is located in downtown Tacoma, Washington. Students can choose majors in business, education, nursing, computer science, electrical engineering, computer engineering, information technology, criminal justice, social work, environmental science, urban studies and interdisciplinary arts and sciences. Classes are offered day and evening, for full or part-time students. The institution is governed by the University of Washington Board of Regents.  <p> Source: Wikipedia'
+            '</div>'+
+            '</div>';
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+          marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+
+
+}
+
+
+       
+    
+
+
+</script>
+
+
+
+	</body>
+
+
+
+
+</html>
