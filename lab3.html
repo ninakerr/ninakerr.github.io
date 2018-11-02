@@ -22,7 +22,7 @@
 	</head>
 	
 	<body>
-	<h2> Leaflet! </h2>
+	<h2> Vermont Landfills</h2>
 		<!-- the map element -->
 		<div id="map"></div>
 		<!-- the script for my map -->
@@ -34,33 +34,27 @@
 			});
 			//make the map
 			var map = new L.Map("map", {
-				center: new L.LatLng(38.7, -75.4),
+				center: new L.LatLng(44.5588, -72.5778),
 				zoom: 7
 			});
 			//add the basemap to the map
 			map.addLayer(Hydda_Full);
 
-			//add a local geojson file
-			$.getJSON("https://opendata.arcgis.com/datasets/32484e6881ef4a77b399457afc22c912_164.geojson",function(data){
-			// add GeoJSON layer to the map once the file is loaded
-			var datalayer = L.geoJson(data ,{
-				onEachFeature: function(feature, featureLayer) {
-					//for each feature, add the properties to the popup
-					featureLayer.bindPopup(feature.properties.crsh_sevri);
-				}
-			});
-
-			//Create the marker cluster group
-			var markers = L.markerClusterGroup();
-			//Add the markers to the datalayer
-			markers.addLayer(datalayer);
-			//add the markers to the map
-			map.addLayer(markers);
-			
-
-			map.fitBounds(markers.getBounds());
-			});
+		
+// loading GeoJSON file - Here my html and geojson file resides in same folder
+			$.getJSON("Landfills.geojson",function(data){
+				L.geoJson(data).addTo(map);
+});
+// add GeoJSON layer to the map once the file is loaded
+	var datalayer = L.geoJson(data ,{
+	onEachFeature: function(feature, featureLayer) {
+	featureLayer.bindPopup(feature.properties.STATUS);
+		}
+	}).addTo(map);
+		map.fitBounds(datalayer.getBounds());
+		
 		</script>
 
+		
 	</body>
 </html>
