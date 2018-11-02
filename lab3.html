@@ -1,43 +1,66 @@
-
+<!DOCTYPE html>
 <html>
-<head>
-  <title>A Leaflet map!</title>
- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
-   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-   crossorigin=""/>
-   
- <!-- Make sure you put this AFTER Leaflet's CSS -->
- <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
-   integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
-   crossorigin=""></script>
-       <script src="jquery-2.1.1.min.js"></script> 
-  <style>
-    #map{ height: 100% }
-  </style>
-</head>
-<body>
+	<head>
+		<!-- the leaflet CSS and JS library-->
+		 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+		   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+		   crossorigin=""/>
+		 <!-- Make sure you put this AFTER Leaflet's CSS -->
+		 <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+		   integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+		   crossorigin=""></script>
+		 <!-- Add JQuery to get local GeoJson file -->
+		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		 <!-- Import the marker clusters from the files we downloaded -->
+		 <link rel="stylesheet" href="Leaflet.markercluster-master/dist/MarkerCluster.css"/>
+		 <link rel="stylesheet" href="Leaflet.markercluster-master/dist/MarkerCluster.Default.css"/>
+		 <script src="Leaflet.markercluster-master/dist/leaflet.markercluster-src.js"></script>
+		<!-- A sytle for the map element -->
+		<style>
+			#map {height: 100vh; background-color: grey;}
+		</style>
+	</head>
+	
+	<body>
+	<h2> Leaflet! </h2>
+		<!-- the map element -->
+		<div id="map"></div>
+		<!-- the script for my map -->
+		<script>
+			//Basemap from https://leaflet-extras.github.io/leaflet-providers/preview/ 
+			var Hydda_Full = L.tileLayer('https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
+				maxZoom: 18,
+				attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+			});
+			//make the map
+			var map = new L.Map("map", {
+				center: new L.LatLng(38.7, -75.4),
+				zoom: 7
+			});
+			//add the basemap to the map
+			map.addLayer(Hydda_Full);
 
-  <div id="map"></div>
+			//add a local geojson file
+			$.getJSON("https://opendata.arcgis.com/datasets/32484e6881ef4a77b399457afc22c912_164.geojson",function(data){
+			// add GeoJSON layer to the map once the file is loaded
+			var datalayer = L.geoJson(data ,{
+				onEachFeature: function(feature, featureLayer) {
+					//for each feature, add the properties to the popup
+					featureLayer.bindPopup(feature.properties.crsh_sevri);
+				}
+			});
 
-  <script>
+			//Create the marker cluster group
+			var markers = L.markerClusterGroup();
+			//Add the markers to the datalayer
+			markers.addLayer(datalayer);
+			//add the markers to the map
+			map.addLayer(markers);
+			
 
-  // initialize the map
-  var map = L.map('map').setView([42.35, -71.08], 13);
+			map.fitBounds(markers.getBounds());
+			});
+		</script>
 
-  // load a tile layer
-  L.tileLayer('http://tiles.mapc.org/basemap/{z}/{x}/{y}.png',
-    {
-      attribution: 'Tiles by <a href="http://mapc.org">MAPC</a>, Data by <a href="http://mass.gov/mgis">MassGIS</a>',
-      maxZoom: 17,
-      minZoom: 9
-    }).addTo(map);
-
- // load GeoJSON from an external file
-  $.getJSON("trails.mapc.json",function(data){
-    // add GeoJSON layer to the map once the file is loaded
-    L.geoJson(data).addTo(map);
-  });
- 
-  </script>
-</body>
+	</body>
 </html>
