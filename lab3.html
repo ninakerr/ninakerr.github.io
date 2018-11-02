@@ -10,6 +10,7 @@
  <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
    integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
    crossorigin=""></script>
+       <script src="jquery-2.1.1.min.js"></script> 
   <style>
     #map{ height: 100% }
   </style>
@@ -31,6 +32,12 @@
       minZoom: 9
     }).addTo(map);
 
+ // load GeoJSON from an external file
+  $.getJSON("trails.mapc.json",function(data){
+    // add GeoJSON layer to the map once the file is loaded
+    L.geoJson(data).addTo(map);
+  });
+ 
   </script>
 </body>
 </html>
