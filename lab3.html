@@ -5,6 +5,7 @@
 <title>Display a map</title>
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
+	  <script src="jquery-2.1.1.min.js"></script> 
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css' rel='stylesheet' />
 <style>
 body { margin:0; padding:0; }
@@ -22,6 +23,14 @@ style: 'mapbox://styles/nkerr0803/cjnzckjuo9by72srvmkze2n7j',
 center: [-122.513671, 47.386032],
 zoom: 3.0
 });
+
+
+  // load GeoJSON from an external file
+  $.getJSON("export-gisdata.mapc.json",function(data){
+    // add GeoJSON layer to the map once the file is loaded
+    L.geoJson(data).addTo(map);
+  });
+
 </script>
  
 </body>
