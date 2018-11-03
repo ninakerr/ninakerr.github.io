@@ -12,9 +12,9 @@
 		 <!-- Add JQuery to get local GeoJson file -->
 		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		 <!-- Import the marker clusters from the files we downloaded -->
-		 <link rel="stylesheet" href="Leaflet.markercluster-master/dist/MarkerCluster.css"/>
-		 <link rel="stylesheet" href="Leaflet.markercluster-master/dist/MarkerCluster.Default.css"/>
-		 <script src="Leaflet.markercluster-master/dist/leaflet.markercluster-src.js"></script>
+		 <link rel="stylesheet" href="Leaflet.markercluster-1.4.1/dist/MarkerCluster.css"/>
+		 <link rel="stylesheet" href="Leaflet.markercluster-1.4.1/dist/MarkerCluster.Default.css"/>
+		 <script src="Leaflet.markercluster-1.4.1/dist/leaflet.markercluster-src.js"></script>
 		<!-- A sytle for the map element -->
 		<style>
 			#map {height: 100vh; background-color: grey;}
@@ -22,7 +22,7 @@
 	</head>
 	
 	<body>
-	<h2> Vermont Landfills</h2>
+	<h2> Leaflet! </h2>
 		<!-- the map element -->
 		<div id="map"></div>
 		<!-- the script for my map -->
@@ -34,31 +34,34 @@
 			});
 			//make the map
 			var map = new L.Map("map", {
-				center: new L.LatLng(44.5588, -72.5778),
+				center: new L.LatLng(38.7, -75.4),
 				zoom: 7
 			});
 			//add the basemap to the map
 			map.addLayer(Hydda_Full);
 
-		
-// loading GeoJSON file - Here my html and geojson file resides in same folder
-			$.getJSON("Landfills.geojson",function(data){
-				L.geoJson(data).addTo(map);
-});
-// add GeoJSON layer to the map once the file is loaded
-	var datalayer = L.geoJson(data ,{
-	onEachFeature: function(feature, featureLayer) {
-	featureLayer.bindPopup(feature.properties.STATUS);
-		}
-	}).addTo(map);
-		map.fitBounds(datalayer.getBounds());
-		
+			//add a local geojson file
+			//Thanks to https://www.igismap.com/add-load-geojson-file-point-polyline-polygon-map-leaflet-js/ for the tutorial
+			$.getJSON("stations.geojson",function(data){
+			// add GeoJSON layer to the map once the file is loaded
+			var datalayer = L.geoJson(data ,{
+				onEachFeature: function(feature, featureLayer) {
+					//for each feature, add the properties to the popup
+					featureLayer.bindPopup(feature.properties.crsh_sevri);
+				}
+			});
 
-	
-map.addLayer(datalayer);
+			//Create the marker cluster group
+			var markers = L.markerClusterGroup();
+			//Add the markers to the datalayer
+			markers.addLayer(datalayer);
+			//add the markers to the map
+			map.addLayer(markers);
+			
+
+			map.fitBounds(markers.getBounds());
+			});
 		</script>
 
-		
 	</body>
 </html>
-
