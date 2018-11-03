@@ -50,35 +50,22 @@
 
 	<div id="map"></div>
 
-	<script src="https://rawgit.com/kbogue13/portfolio/master/assets/js/global_co2_final.js"></script>
+	<script src="laandfills.js"></script>
 	
 	<script>
-		
-		var map = L.map('map').setView([24, 19], 1.7);
-		
+	
+var Hydda_Full = L.tileLayer('https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
+				maxZoom: 18,
+				attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+				});
+			//make the map
+			var map = new L.Map("map", {
+				center: new L.LatLng(44.5588, -72.5778),
+				zoom: 7
+			});
+			//add the basemap to the map
+			map.addLayer(Hydda_Full);
 
-		L.tileLayer('https://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png', {
-	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-	subdomains: 'abcd',
-		
-		}).addTo(map);
-
-//Control limiting panning
-		var southWest = L.latLng(-89.98155760646617, -180),
-		northEast = L.latLng(89.99346179538875, 180);
-		var bounds = L.latLngBounds(southWest, northEast);
-
-		map.setMaxBounds(bounds);
-		map.on('drag', function() {
-		    map.panInsideBounds(bounds, { animate: false });
-		});
-
-//Limit zoom levels
-
-	map.options.maxZoom = 6;
-	map.options.minZoom = 1.7;
-
-		
 // control that shows info in the white info box in the top right
 	var info = L.control();
 
@@ -86,13 +73,6 @@
 		this._div = L.DomUtil.create('div', 'info');
 		this.update();
 		return this._div;
-	};
-
-
-	info.update = function (props) {
-		this._div.innerHTML = '<h4>Average CO2 Emissions Per Person</h4>' +  (props ?
-			'<b>' + props.country + '</b><br />' + props.CO2_PerCap + ' metric tons per year' + '<br />' + 'World Rank: ' + props.WORLD_RANK + '/198'
-			: 'Hover over a country');
 	};
 
 	info.addTo(map);
@@ -149,15 +129,8 @@ var geojson;
 			map.fitBounds(e.target.getBounds());
 		}
 
-		function onEachFeature(feature, layer) {
-			layer.on({
-				mouseover: highlightFeature,
-				mouseout: resetHighlight,
-				click: zoomToFeature
-			});
-		}
-
-		//style specific to file
+				
+	//style specific to file
 
 		geojson = L.geoJson(CO2_PerCap, {
 			style: style,
