@@ -54,35 +54,11 @@
 		map.fitBounds(datalayer.getBounds());
 		
 
-		datalayer = L.geoJson(data, {
-    style: function(feature) {
-        return {color: feature.properties.STATUS};
-    },
-    pointToLayer: function(feature, latlng) {
-        return new L.CircleMarker(latlng, {radius: 10, fillOpacity: 0.85});
-    },
-    onEachFeature: function (feature, layer) {
-        layer.bindPopup(feature.properties.SITENAME);
-    }
-});
-
-map.addLayer(geojsonLayer);
+	
+map.addLayer(datalayer);
 		</script>
 
 		
 	</body>
 </html>
 
-geojsonLayer = L.geoJson(geojson, {
-    style: function(feature) {
-        return {color: feature.properties.STATUS};
-    },
-    pointToLayer: function(feature, latlng) {
-        return new L.CircleMarker(latlng, {radius: 10, fillOpacity: 0.85});
-    },
-    onEachFeature: function (feature, layer) {
-        layer.bindPopup(feature.properties.SITENAME);
-    }
-});
-
-map.addLayer(geojsonLayer);
