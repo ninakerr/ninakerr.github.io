@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Global CO2 Emissions</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--Leaflet CSS-->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+	<!--Leaflet script. Must be placed after Leaflet CSS-->
+	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+	
+	<style>
+		#map {
+			width: 80%;
+			height: 550px;
+			margin-left: auto;
+			margin-right: auto;
+		
+		}
+
+		.info {
+			padding: 6px 8px;
+			font: 16px/18px Calibri, Garamond, sans-serif;
+			background: white;
+			background: rgba(255,255,255,0.8);
+			box-shadow: 0 0 15px rgba(0,0,0,0.2);
+			border-radius: 5px;
+		}
+		.info h4 {
+			margin: 0 0 5px;
+			color: #777;
+		}
+
+		.legend {
+			text-align: left;
+			line-height: 18px;
+			color: #555;
+		}
+		.legend i {
+			width: 18px;
+			height: 18px;
+			float: left;
+			margin-right: 8px;
+			opacity: 0.9;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div id="map"></div>
+
+	<script src="https://rawgit.com/kbogue13/portfolio/master/assets/js/global_co2_final.js"></script>
+	
+	<script>
+		
+		var map = L.map('map').setView([24, 19], 1.7);
+		
+
+		L.tileLayer('https://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+	subdomains: 'abcd',
+		
+		}).addTo(map);
+
+//Control limiting panning
+		var southWest = L.latLng(-89.98155760646617, -180),
+		northEast = L.latLng(89.99346179538875, 180);
+		var bounds = L.latLngBounds(southWest, northEast);
+
+		map.setMaxBounds(bounds);
+		map.on('drag', function() {
+		    map.panInsideBounds(bounds, { animate: false });
+		});
+
+//Limit zoom levels
+
+	map.options.maxZoom = 6;
+	map.options.minZoom = 1.7;
+
+		
+// control that shows info in the white info box in the top right
+	var info = L.control();
+
+	info.onAdd = function (map) {
+		this._div = L.DomUtil.create('div', 'info');
+		this.update();
+		return this._div;
+	};
+
+
+	info.update = function (props) {
+		this._div.innerHTML = '<h4>Average CO2 Emissions Per Person</h4>' +  (props ?
+			'<b>' + props.country + '</b><br />' + props.CO2_PerCap + ' metric tons per year' + '<br />' + 'World Rank: ' + props.WORLD_RANK + '/198'
+			: 'Hover over a country');
+	};
+
+	info.addTo(map);
+
+
+//// get color depending on CO2_PerCap which represents CO2 emissions per capita
+	function getColor(d) {
+		return d > 7.9 ? '#bd0026' :
+		       d > 5.9  ? '#f03b20' :
+		       d > 3.9   ? '#fd8d3c' :
+		       d > 1.9  ? '#fecc5c' :
+		       d > 0   ? '#ffffb2' :
+		       			'#696969';
+	}
+
+//styling the GeoJSON so that fill changes with the value associated with the cell and CO2 emissions
+	function style(feature) {
+    	return {
+        fillColor: getColor(feature.properties.CO2_PerCap),
+        weight: 1,
+        opacity: 1,
+        color: 'black',
+        dashArray: '3',
+        fillOpacity: 0.7,
+    };
+}
+
+function highlightFeature(e) {
+		var layer = e.target;
+
+		layer.setStyle({
+			weight: 3,
+			color: '#ffffff',
+			dashArray: '',
+			fillOpacity: 0.1
+		});
+
+		if (!L.Browser.ie && !L.Browser.opera) {
+			layer.bringToFront();
+		}
+
+		info.update(layer.feature.properties);
+		}
+L.geoJson(CO2_PerCap, {style: style}).addTo(map);
+
+var geojson;
+
+		function resetHighlight(e) {
+			geojson.resetStyle(e.target);
+			info.update();
+		}
+
+		function zoomToFeature(e) {
+			map.fitBounds(e.target.getBounds());
+		}
+
+		function onEachFeature(feature, layer) {
+			layer.on({
+				mouseover: highlightFeature,
+				mouseout: resetHighlight,
+				click: zoomToFeature
+			});
+		}
+
+		//style specific to file
+
+		geojson = L.geoJson(CO2_PerCap, {
+			style: style,
+			onEachFeature: onEachFeature
+		}).addTo(map);
+
+	map.attributionControl.addAttribution('Emissions data &copy; <a href="http://data.un.org/Data.aspx?q=co2+emissions+per+capita&d=WDI&f=Indicator_Code%3aEN.ATM.CO2E.PC">UNdata</a>');
+
+var legend = L.control({position: 'bottomleft'});
+
+	legend.onAdd = function (map) {
+
+		var div = L.DomUtil.create('div', 'info legend'),
+			grades = [0, 2, 4, 6, 8],
+			labels = ['Tons/Year'],
+			from, to;
+
+		for (var i = 0; i < grades.length; i++) {
+			from = grades[i];
+			to = grades[i + 1];
+
+			labels.push(
+				'<i style="background:' + getColor(from + 1) + '"></i> ' +
+				from + (to ? '&ndash;' + (from + 1.9) : '+'));
+		}
+
+		div.innerHTML = labels.join('<br>');
+		return div;
+	};
+
+	legend.addTo(map);
+
+//this portion of the script includes a POI for a group layer. Additioally the 'bindPopup' forces a popup with corresponding text.           
+         var qatar = L.marker([25.3548, 51.1839]).bindPopup('Qatar has the <b>highest</b> average CO2 emissions per person (40.46 metric tones)'),
+          	burundi = L.marker([-3.3731, 29.9189]).bindPopup('Burundi has the <b>lowest</b> average CO2 emissions per person (0.03 metric tons)');
+        
+ //this line of code is going to combine the previous set of variables to a group and subsequently add them to a map.
+         var cities = L.layerGroup([qatar, burundi]).addTo(map);
+
+	</script>
+</body>
