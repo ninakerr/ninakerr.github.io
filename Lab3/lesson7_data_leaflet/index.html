@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <title>Food resources: Community gardens and food pantries</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.css" type="text/css" crossorigin="">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.2.0/leaflet.js" crossorigin=""></script>
+      <script src="gardens.js"></script>
+      <script src="pantries.js"></script>
+      <link rel="stylesheet" href="style.css" type="text/css">
+       
+        <script type="text/javascript">
+          var map;
+
+          function init() {
+          // create map and set center and zoom level
+          map = new L.map('mapid');
+          map.setView([39.960,-75.210],14);
+
+            // create and add the tile layer
+          var tiles = L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  subdomains: ['a', 'b', 'c']
+})
+          tiles.addTo(map);
+
+          var gardenLayer;
+          var pantryLayer;
+
+          var selection;
+          var selectedLayer;
+
+          // define the styles for the garden layer (unselected and selected)
+          function gardenStyle(feature) {
+            return {
+               fillColor: "#FF00FF",
+               fillOpacity: 1,
+               color: '#B04173',
+            };
+          }
+
+          function gardenSelectedStyle(feature) {
+             return {
+               fillColor: "#00FFFB",
+               color: '#0000FF',
+               fillOpacity: 1
+            };
+          }
+
+          // handle click events on garden features
+          function gardenOnEachFeature(feature, layer){
+            layer.on({
+              click: function(e) {
+                  if (selection) {            
+                    resetStyles();
+                  }
+              
+                  e.target.setStyle(gardenSelectedStyle());
+                  selection = e.target;
+                  selectedLayer = gardenLayer;
+
+                  // Insert some HTML with the feature name
+                  buildSummaryLabel(feature);
+
+                  L.DomEvent.stopPropagation(e); // stop click event from being propagated further
+                }
+            });
+          }
+
+                // add the gardens GeoJSON layer using the gardensData variable from gardens.js
+                var gardenLayer = new L.geoJSON(gardensData,{
+                  style: gardenStyle,
+                  onEachFeature: gardenOnEachFeature
+                });    
+               
+                gardenLayer.addTo(map);
+       
+
+
+          // create icons for pantries (selected and unselected)
+          var pantriesIcon = L.icon({
+            iconUrl: 'pantries.svg',
+            iconSize: [20,20]
+          });
+
+          var selectedPantriesIcon = L.icon({
+            iconUrl: 'pantries_selected.svg',
+            iconSize: [20,20]
+          });
+
+          // handle click events on pantry features
+          function pantriesOnEachFeature(feature, layer){
+            layer.on({
+              click: function(e) {
+                  if (selection) {
+                    resetStyles();
+                  }
+                  e.target.setIcon(selectedPantriesIcon);
+                  selection = e.target;
+                  selectedLayer = pantryLayer;
+                  
+                  // Insert some HTML with the feature name
+                  buildSummaryLabel(feature);
+
+                  L.DomEvent.stopPropagation(e); // stop click event from being propagated further
+                }
+            });
+          }
+
+          
+          
+          // add the gardens GeoJSON layer using the pantriesData variable from pantries.js
+                pantryLayer = new L.geoJSON(pantriesData,{
+                     pointToLayer: function (feature, latlng) {
+                      return L.marker(latlng, {icon: pantriesIcon});
+                     },
+                     onEachFeature: pantriesOnEachFeature
+                   }
+                );    
+               
+               pantryLayer.addTo(map);
+
+
+          // handle clicks on the map that didn't hit a feature
+          map.addEventListener('click', function(e) {
+            if (selection) {
+              resetStyles();
+              selection = null;
+              document.getElementById('summaryLabel').innerHTML = '<p>Click a garden or food pantry on the map to get more information.</p>';
+            }
+          });
+          
+          // function to set the old selected feature back to its original symbol. Used when the map or a feature is clicked.
+          function resetStyles(){
+            if (selectedLayer === pantryLayer) selection.setIcon(pantriesIcon);
+            else if (selectedLayer === gardenLayer) selectedLayer.resetStyle(selection);
+          }
+          
+          // function to build the HTML for the summary label using the selected feature's "name" property
+          function buildSummaryLabel(currentFeature){
+            var featureName = currentFeature.properties.name || "Unnamed feature";
+            document.getElementById('summaryLabel').innerHTML = '<p style="font-size:18px"><b>' + featureName + '</b></p>';
+          }
+          
+        }
+            
+        </script>
+      </head>
+      <body onload="init()">
+        <h1 id="title">Food resources: Community gardens and food pantries</h1>
+
+        <div id="mapid"></div>
+        <div id="summaryLabel">
+            <p>Click a garden or food pantry on the map to get more information.</p>
+        </div>
+      </body>
+    </html>
