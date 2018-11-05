@@ -19,11 +19,16 @@
 
     <div id="map" style="width: 800px; height: 440px; border: 1px solid #AAA;"></div>
 
-    <script type='text/javascript' src='maps/markers.js'></script>
-    <script type='text/javascript' src='maps/markers2.js'></script>
+    <script type='text/javascript' src='maps/markers.json'></script>
 
 
     <script type='text/javascript' src='maps/leaflet.js'></script>
+
+   <script> $.getJSON("favorites.json",function(data){
+    // add GeoJSON layer to the map once the file is loaded
+    L.geoJson(data).addTo(map);</script>
+  });
+ 
 
     <h5>Thanks to http://asmaloney.com for the tutorial</h5>
   </body>

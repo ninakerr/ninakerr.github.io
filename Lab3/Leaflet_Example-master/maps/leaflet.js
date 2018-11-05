@@ -1,5 +1,5 @@
 // See post: http://asmaloney.com/2014/01/code/creating-an-interactive-map-with-leaflet-and-openstreetmap/
-
+  
 var map = L.map( 'map', {
   center: [20.0, 5.0],
   minZoom: 2,
@@ -11,17 +11,18 @@ L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   subdomains: ['a', 'b', 'c']
 }).addTo( map )
 
+var myURL = jQuery( 'script[src$="leaflet.js"]' ).attr( 'src' ).replace( 'leaflet.js', '' );
  
 var myIcon = L.icon({
-    iconUrl: 'maps/images/red.png',
-     iconSize: [29, 24],
+    iconUrl: 'maps/images/pin48.png',
+    iconSize: [29, 24],
     iconAnchor: [9, 21],
     popupAnchor: [0, -14]
 });
-
-for ( var i=0; i < markers.length; ++i )
+ 
+for ( var i=0; i < markers.length; ++i ) 
 {
- L.markers( [markers[i].lat, markers[i].lng], {icon: myIcon} )
-  .bindPopup( '<a href="' + markers[i].url + '" target="_blank">' + markers[i].name + '</a>' )
-  .addTo( map );
+   L.marker( [markers[i].lat, markers[i].lng], {icon: myIcon} )
+      .bindPopup( '<a href="' + markers[i].url + '" target="_blank">' + markers[i].name + '</a>' )
+      .addTo( map );
 }

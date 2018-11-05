@@ -1,0 +1,16 @@
+favorite =
+ {
+     "name": "Turkey",
+     "url": "https://en.wikipedia.org/wiki/Russia",
+     "lat": 38.96,
+     "lng": 35.24
+   },
+     {
+     "name": "Spain",
+     "url": "https://en.wikipedia.org/wiki/Spain",
+     "lat": 40.41,
+     "lng": -3.703
+   }
+
+  
+];

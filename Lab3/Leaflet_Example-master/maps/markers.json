@@ -16,8 +16,100 @@ markers = [
      "url": "https://en.wikipedia.org/wiki/United_States",
      "lat": 37.090240,
      "lng": -95.712891
-   }
-
-
-  
+   },
+   {
+     "name":"Germany",
+     "lat": 51.1657,
+     "lng": 10.4515
+      },
+   {
+     "name": "Bahamas",
+     "url": "https://en.wikipedia.org/wiki/Bahamas",
+     "lat": 25.03,
+     "lng": -77.3
+    },
+   { 
+    "name": "England",
+     "url": "https://en.wikipedia.org/wiki/England",
+     "lat": 52.355518,
+     "lng": -1.174320
+   },
+   {
+     "name": "France",
+     "url": "https://en.wikipedia.org/wiki/France",
+     "lat": 46.227638,
+     "lng": 2.213749
+   },
+  {
+     "name": "South Africa",
+     "url": "https://en.wikipedia.org/wiki/South_Africa",
+     "lat": -30.559482,
+     "lng": 22.937506
+   },
+   {
+     "name": "Japan",
+     "url": "https://en.wikipedia.org/wiki/Japan",
+     "lat": 36.204824,
+     "lng": 138.252924
+   },
+    {
+     "name": "Russia",
+     "url": "https://en.wikipedia.org/wiki/Russia",
+     "lat": 61.5,
+     "lng": 105.3
+   },
+     {
+     "name": "Spain",
+     "url": "https://en.wikipedia.org/wiki/Spain",
+     "lat": 40.41,
+     "lng": -3.703
+   },
+    {
+     "name": "Turkey",
+     "url": "https://en.wikipedia.org/wiki/Turkey",
+     "lat": 38.96,
+     "lng": 35.24
+   },
+    {
+     "name": "Iraq",
+     "url": "https://en.wikipedia.org/wiki/Iraq",
+     "lat": 33.43,
+     "lng": 43.6
+   },
+    {
+     "name": "Oman",
+     "url": "https://en.wikipedia.org/wiki/Oman",
+     "lat": 21.47,
+     "lng": 55.9
+ },
+    {
+     "name": "Afghanistan",
+     "url": "https://en.wikipedia.org/wiki/Afghanistan",
+     "lat": 33.93,
+     "lng": 66.7
+     },
+    {
+     "name": "Jordan",
+     "url": "https://en.wikipedia.org/wiki/jordan",
+     "lat": 30.58,
+     "lng": 36.2
+     },
+    {
+     "name": "Ascension Island",
+     "url": "https://en.wikipedia.org/wiki/Afscensionisland",
+     "lat": 7.94,
+     "lng": -14.35
+     },
+    {
+     "name": "Guam",
+     "url": "https://en.wikipedia.org/wiki/guam",
+     "lat": 13.44,
+     "lng":-144.79
+     },
+    {
+     "name": "Korea",
+     "url": "https://en.wikipedia.org/wiki/korea",
+     "lat": 35.9,
+     "lng": 127.76
+     }     
 ];
