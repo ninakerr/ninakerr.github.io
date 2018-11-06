@@ -40,12 +40,7 @@ markers = [
      "lat": 46.227638,
      "lng": 2.213749
    },
-  {
-     "name": "South Africa",
-     "url": "https://en.wikipedia.org/wiki/South_Africa",
-     "lat": -30.559482,
-     "lng": 22.937506
-   },
+  
    {
      "name": "Japan",
      "url": "https://en.wikipedia.org/wiki/Japan",
