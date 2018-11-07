@@ -402,11 +402,14 @@ var geojsonMarkerOptions = {
     fillOpacity: 0.8
 };
 
+
 L.geoJson(points_b, {
     pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng, geojsonMarkerOptions);
     }
 }).addTo(map);
+
+
     </script>
 
 
