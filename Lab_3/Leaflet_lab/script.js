@@ -44,4 +44,4 @@ $.getJSON(url_b, function (geojson) {
   marker.bindPopup("<b> New House 26 Reresentative:</b><br>Debbie Mucarsel-Powell (D)").openPopup();
   var marker2 = L.marker([25.69, -80.30]).addTo(map);
   marker2.bindPopup("<b> New House 27 Reresentative:</b> <br>Donna Shalala(D)").openPopup();
-});
+}).addTo(map);
