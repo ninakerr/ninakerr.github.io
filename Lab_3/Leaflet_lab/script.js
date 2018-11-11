@@ -41,7 +41,17 @@ $.getJSON(url_b, function (geojson) {
   }).addTo(map);
   controlLayers.addOverlay(geojsonLayer, 'Senate Districts');
   var marker = L.marker([25.4, -81.1]).addTo(map);
-  marker.bindPopup("<b> New House 26 Reresentative:</b><br>Debbie Mucarsel-Powell (D)").openPopup();
+  marker.bindPopup("<b> New House 26 Reresentative:</b><br>Debbie Mucarsel-Powell (D)");
+  marker.on('click', onClick);
+
+  function onClick(e) {
+   var popup = e.target.getPopup();
+   var content = popup.getContent();
+
+   console.log(content);
+}
   var marker2 = L.marker([25.69, -80.30]).addTo(map);
-  marker2.bindPopup("<b> New House 27 Reresentative:</b> <br>Donna Shalala(D)").openPopup();
+  marker2.bindPopup("<b> New House 27 Reresentative:</b> <br>Donna Shalala(D)");
+
+  
 }).addTo(map);
