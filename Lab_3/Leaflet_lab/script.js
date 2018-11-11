@@ -20,7 +20,7 @@ $.getJSON(url, function (geojson) {
         'weight': 1,
         'fillColor': 'grey',
           'color': 'red',
-        'fillOpacity': 1
+        'fillOpacity': 0.6
       }
     }
   }).addTo(map);
@@ -35,7 +35,7 @@ $.getJSON(url_b, function (geojson) {
         'weight': 1,
         'fillColor': 'grey',
         'color': 'blue',
-        'fillOpacity': 1
+        'fillOpacity': 0.6
       }
     }
   }).addTo(map);
