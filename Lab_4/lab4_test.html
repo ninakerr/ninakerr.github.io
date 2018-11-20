@@ -1,0 +1,306 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	<title> Ring of Fire - Mapbox</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="style.css">
+	<script src='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
+	<link href='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+	<style >
+	body {
+  color: #888;
+  font: 300 16px/22px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-s
+}
+	
+	#remover {
+		margin: 0 auto;
+		background-color: #ff6600;
+		color: 'black';
+		padding: 0.1em;
+		border: 2px solid #FF4500;
+		border-radius: 0.3em;
+		cursor: pointer;
+		position: absolute;
+		left: 1em;
+		top: 22em;
+	}
+	#remover:hover {
+		background-color: #FF4500;
+	}
+	#remover2 {
+		margin: 0 auto;
+		background-color: #C71585;
+		color: 'black';
+		padding: 0.1em;
+		border: 2px solid #FF1493;
+		border-radius: 0.3em;
+		cursor: pointer;
+		position: absolute;
+		left: 1em;
+		top: 60em;
+	}
+	#remover2:hover {
+		background-color: #FFFFFF;
+	}
+	#equake {
+		margin: 0 auto;
+		background-color: #b1b9b2;
+		color: 'black';
+		padding: 0.1em;
+		border: 2px solid #b1b9b2;
+		border-radius: 0.3em;
+		cursor: pointer;
+		position: absolute;
+		left: 1em;
+		top: 24em;
+	}
+	#equake:hover {
+		background-color: #b1b9b2;
+	}
+	
+	#volcano {
+		margin: 0 auto;
+		background-color: #b1b9b2;
+		color: 'black';
+		padding: 0.1em;
+		border: 2px solid #b1b9b2;
+		border-radius: 0.3em;
+		cursor: pointer;
+		position: absolute;
+		left: 1em;
+		top: 62em;
+	}
+	#volcano:hover {
+		background-color: #b1b9b2;
+	}
+</style>
+</head>
+<body>
+	<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js'></script>
+	<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css' type='text/css' />
+	
+	<!-- Mapbox 1 -->	
+	
+			<h2 style="text-align: center;">Ring of Fire</h2>
+			<p> The Ring of Fire is a major area in the basin of the Pacific Ocean where many earthquakes and volcanic eruptions occur. In a large 40,000 km (25,000 mi) horseshoe shape, it is associated with a nearly continuous series of oceanic trenches, volcanic arcs, and volcanic belts and plate movements. It has 452 volcanoes (more than 75% of the world's active and dormant volcanoes). The Ring of Fire is sometimes called the circum-Pacific belt.<br><br>About 90% of the world's earthquakes and 81% of the world's largest earthquakes occur along the Ring of Fire. All but three of the world's 25 largest volcanic eruptions of the last 11,700 years occurred at volcanoes in the Ring of Fire. The Ring of Fire is a direct result of plate tectonics: the movement and collisions of lithospheric plates, especially subduction in the northern portion. The southern portion is more complex, with a number of smaller tectonic plates in collision with the Pacific plate from the Mariana Islands, the Philippines, Bougainville, Tonga, and New Zealand. </p>
+		
+
+<section>
+		<div>
+			<h2 style="text-align: center"> Magnitude 2.5+ Earthquakes in the past 30 days (source: USGS)</h2>
+
+			<div id='map' style='width: 100%; height: 500px'></div>
+			<br>
+			
+		
+			<script>
+				mapboxgl.accessToken = 'pk.eyJ1IjoibmtlcnIwODAzIiwiYSI6ImNqZ2NzajFzcjJ3cncyeHQ1cHNwdWcycnEifQ.UiE1-IaevC2KYyN63XDQxw';
+				//The map variable
+				var map = new mapboxgl.Map({
+			    container: 'map',
+			    style: 'mapbox://styles/nkerr0803/cjokhabk45lbo2sohcdaqif1d', // stylesheet location
+			    center: [-178.14, 24.99], // starting position [lng, lat]
+			    zoom: 1 // starting zoom
+				});
+				map.scrollZoom.disable();
+				map.addControl(new MapboxGeocoder({
+					accessToken: mapboxgl.accessToken
+				}));
+				map.addControl(new mapboxgl.NavigationControl({
+					showCompass: false
+				}));
+				map.on('load', function(){
+					map.addSource('earthquakes', {
+						"type": "geojson",
+						"data": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_month.geojson"
+					});
+					map.addLayer({
+						"id":"equakes",
+						"type":"circle",
+						"source":"earthquakes",
+						"paint": {
+							"circle-color": "#ff6600",
+							"circle-opacity": 0.5,
+							"circle-radius": 6,
+							"circle-stroke-color": '#ff3300',
+							"circle-stroke-width": 1,
+							"circle-stroke-opacity": 0.75
+						}
+					});
+			   //add a handler for clicking/popups 
+				//Thanks to: https://www.mapbox.com/mapbox-gl-js/example/popup-on-click/ 
+				map.on('click', 'equakes', function (e) {
+					map.getCanvas().style.cursor = 'pointer';
+					var coordinates = e.features[0].geometry.coordinates.slice();
+					var description = "<p>Mag: "+e.features[0].properties.mag+"<br>Location: "+e.features[0].properties.place+"<br>URL: <a href='"+e.features[0].properties.url+"'>More Info</a></p>"
+			        // Ensure that if the map is zoomed out such that multiple
+			        // copies of the feature are visible, the popup appears
+			        // over the copy being pointed to.
+			        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+			        	coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			        }
+			        //make the popup
+			        new mapboxgl.Popup()
+			        .setLngLat(coordinates)
+			        .setHTML(description)
+			        .addTo(map);
+			    });
+				    // Change the cursor to a pointer when the mouse is over the places layer.
+				    map.on('mouseenter', 'equakes', function () {
+				    	map.getCanvas().style.cursor = 'pointer';
+				    });
+    				// Change it back to a pointer when it leaves.
+    				map.on('mouseleave', 'equakes', function () {
+    					map.getCanvas().style.cursor = 'pointer';
+    				});
+    			});
+				map.on('load', function(){
+					var switchy = document.getElementById('remover');
+					switchy.addEventListener("click", function(){
+						switchy = document.getElementById('remover');
+						if (switchy.className === 'on') {
+							switchy.setAttribute('class', 'off');
+							map.setLayoutProperty('equakes', 'visibility', 'none');
+							switchy.innerHTML = 'Toggle Earthquakes ON';
+						} else {
+							switchy.setAttribute('class', 'on');
+							map.setLayoutProperty('equakes', 'visibility', 'visible');
+							switchy.innerHTML = 'Toggle Earthquakes OFF';
+						}
+					});
+	//home button
+	var equake = document.getElementById('equake');
+	equake.addEventListener("click", function(){
+		map.setCenter([-178.141, 24.99]);
+		map.setZoom(2);
+		map.setstyle('mapbox://styles/nkerr0803/cjokhabk45lbo2sohcdaqif1d');
+	});
+});
+</script>
+<div id='remover'>Toggle Earthquakes OFF</div>
+<div id='equake'>Reset Map</div>
+</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Mapbox 2-->
+<div>
+	
+	<h2 style="text-align: center">Historical Significant Volcanic Eruption Locations (source: HIFLD)</h2>
+	<div id="map2" style='width: 100%; height: 500px'></div>
+	
+
+	<script>
+				mapboxgl.accessToken = 'pk.eyJ1IjoibmtlcnIwODAzIiwiYSI6ImNqZ2NzajFzcjJ3cncyeHQ1cHNwdWcycnEifQ.UiE1-IaevC2KYyN63XDQxw';
+				//The map variable
+				var map2 = new mapboxgl.Map({
+			    container: 'map2',
+			    style: 'mapbox://styles/nkerr0803/cjokhabk45lbo2sohcdaqif1d', // stylesheet location
+			    center: [-178.14, 24.99], // starting position [lng, lat]
+			    zoom: 1 // starting zoom
+				});
+				map2.scrollZoom.disable();
+				map2.addControl(new MapboxGeocoder({
+					accessToken: mapboxgl.accessToken
+				}));
+				map2.addControl(new mapboxgl.NavigationControl({
+					showCompass: false
+				}));
+				map2.on('load', function(){
+					map2.addSource('volcano', {
+						"type": "geojson",
+						"data": "https://opendata.arcgis.com/datasets/3ed5925b69db4374aec43a054b444214_6.geojson"
+					});
+					map2.addLayer({
+						"id":"volcano",
+						"type":"circle",
+						"source":"volcano",
+						"paint": {
+							"circle-color": "#C71585",
+							"circle-opacity": 0.6,
+							"circle-radius": 6,
+							"circle-stroke-color": "#FF1493",
+							"circle-stroke-width": 1,
+							"circle-stroke-opacity": 0.75
+						}
+					});
+			   //add a handler for clicking/popups 
+				//Thanks to: https://www.mapbox.com/mapbox-gl-js/example/popup-on-click/ 
+				map2.on('click', 'volcano', function (e) {
+					map.getCanvas().style.cursor = 'pointer';
+					var coordinates = e.features[0].geometry.coordinates.slice();
+					var description = "<p>Name: "+e.features[0].properties.NAME+"<br>Location: "+e.features[0].properties.LOCATION+"<br>Morphology: " + e.features[0].properties.MORPHOLOGY + "</p>";
+			        // Ensure that if the map is zoomed out such that multiple
+			        // copies of the feature are visible, the popup appears
+			        // over the copy being pointed to.
+			        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+			        	coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			        }
+			        //make the popup
+			        new mapboxgl.Popup()
+			        .setLngLat(coordinates)
+			        .setHTML(description)
+			        .addTo(map2);
+			    });
+				    // Change the cursor to a pointer when the mouse is over the places layer.
+				    map2.on('mouseenter', 'volcano', function () {
+				    	map.getCanvas().style.cursor = 'pointer';
+				    });
+    				// Change it back to a pointer when it leaves.
+    				map2.on('mouseleave', 'volcano', function () {
+    					map.getCanvas().style.cursor = 'pointer';
+    				});
+    			});
+				map2.on('load', function(){
+					var switchy = document.getElementById('remover2');
+					switchy.addEventListener("click", function(){
+						switchy = document.getElementById('remover2');
+						if (switchy.className === 'on') {
+							switchy.setAttribute('class', 'off');
+							map2.setLayoutProperty('volcano', 'visibility', 'none');
+							switchy.innerHTML = 'Toggle Volcanoes ON';
+						} else {
+							switchy.setAttribute('class', 'on');
+							map2.setLayoutProperty('volcano', 'visibility', 'visible');
+							switchy.innerHTML = 'Toggle Volcanoes OFF';
+						}
+					});
+	//home button
+	var volcano = document.getElementById('volcano');
+	volcano.addEventListener("click", function(){
+		map2.setCenter([-178.141, 24.99]);
+		map2.setZoom(2);
+		map2.setstyle('mapbox://styles/nkerr0803/cjokj1qd34klu2rt61tivhdaj');
+	});
+});
+
+</script>
+<div id='remover2'>Toggle Volcanoes OFF</div>
+			<div id='volcano'>Reset Map</div>
+	<p>
+		This dataset represents historical significant volcanic eruptions. A significant eruption is classified as one that meets at least one of the following criteria: caused fatalities, caused moderate damage (approximately $1 million or more), Volcanic Explosivity Index (VEI) of 6 or greater, generated a tsunami, or was associated with a significant earthquake. 
+	</p>
+</section>
+
+</body>
+</html>
