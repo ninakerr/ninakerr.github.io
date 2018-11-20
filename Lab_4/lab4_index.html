@@ -13,46 +13,61 @@
 	
 	#remover {
 		margin: 0 auto;
-		background-color: #FFFF00;
+		background-color: #ff6600;
 		color: 'black';
 		padding: 0.1em;
 		border: 2px solid #FF4500;
 		border-radius: 0.3em;
 		cursor: pointer;
 		position: absolute;
-		left: 0.7em;
-		top: 7em;
+		left: 1em;
+		top: 20.5em;
 	}
 	#remover:hover {
 		background-color: #FF4500;
 	}
-	#equake {
+	#remover2 {
 		margin: 0 auto;
-		background-color: #C8C8C8;
+		background-color: #C71585;
 		color: 'black';
 		padding: 0.1em;
-		border: 2px solid #024731;
+		border: 2px solid #FF1493;
 		border-radius: 0.3em;
 		cursor: pointer;
 		position: absolute;
-		left: 0.7em;
-		top: 4.5em;
+		left: 1em;
+		top: 57em;
+	}
+	#remover2:hover {
+		background-color: #FFFFFF;
+	}
+	#equake {
+		margin: 0 auto;
+		background-color: #b1b9b2;
+		color: 'black';
+		padding: 0.1em;
+		border: 2px solid #b1b9b2;
+		border-radius: 0.3em;
+		cursor: pointer;
+		position: absolute;
+		left: 1em;
+		top: 22.5em;
 	}
 	#equake:hover {
-		background-color: #FF4500;
+		background-color: #b1b9b2;
 	}
 	
 	#volcano {
 		margin: 0 auto;
-		background-color: #4bdaf7;
+		background-color: #b1b9b2;
 		color: 'black';
 		padding: 0.1em;
-		border: 2px solid #04126c;
+		border: 2px solid #b1b9b2;
 		border-radius: 0.3em;
 		cursor: pointer;
 		position: absolute;
-		left: 0.7em;
-		top: 43.5em;
+		left: 1em;
+		top: 59em;
 	}
 	#volcano:hover {
 		background-color: #b1b9b2;
@@ -66,14 +81,15 @@
 	<!-- Mapbox 1 -->	
 	
 			<h2 style="text-align: center;">Ring of Fire</h2>
-			<p> The Ring of Fire is a major area in the basin of the Pacific Ocean where many earthquakes and volcanic eruptions occur. In a large 40,000 km (25,000 mi) horseshoe shape, it is associated with a nearly continuous series of oceanic trenches, volcanic arcs, and volcanic belts and plate movements. It has 452 volcanoes (more than 75% of the world's active and dormant volcanoes). The Ring of Fire is sometimes called the circum-Pacific belt.<br><br>About 90% of the world's earthquakes and 81% of the world's largest earthquakes occur along the Ring of Fire. All but three of the world's 25 largest volcanic eruptions of the last 11,700 years occurred at volcanoes in the Ring of Fire. The Ring of Fire is a direct result of plate tectonics: the movement and collisions of lithospheric plates, especially subduction in the northern portion. The southern portion is more complex, with a number of smaller tectonic plates in collision with the Pacific plate from the Mariana Islands, the Philippines, Bougainville, Tonga, and New Zealand. </p><br>
+			<p> The Ring of Fire is a major area in the basin of the Pacific Ocean where many earthquakes and volcanic eruptions occur. In a large 40,000 km (25,000 mi) horseshoe shape, it is associated with a nearly continuous series of oceanic trenches, volcanic arcs, and volcanic belts and plate movements. It has 452 volcanoes (more than 75% of the world's active and dormant volcanoes). The Ring of Fire is sometimes called the circum-Pacific belt.<br><br>About 90% of the world's earthquakes and 81% of the world's largest earthquakes occur along the Ring of Fire. All but three of the world's 25 largest volcanic eruptions of the last 11,700 years occurred at volcanoes in the Ring of Fire. The Ring of Fire is a direct result of plate tectonics: the movement and collisions of lithospheric plates, especially subduction in the northern portion. The southern portion is more complex, with a number of smaller tectonic plates in collision with the Pacific plate from the Mariana Islands, the Philippines, Bougainville, Tonga, and New Zealand. </p>
 		
 
 <section>
 		<div>
 			<h2 style="text-align: center"> Magnitude 2.5+ Earthquakes in the past 30 days (source: USGS)</h2>
 
-			<div id='map' style='width: 100%; height: 500px;'></div><br></br>
+			<div id='map' style='width: 100%; height: 500px'></div>
+			<br>
 			
 		
 			<script>
@@ -187,7 +203,7 @@
 <div>
 	
 	<h2 style="text-align: center">Historical Significant Volcanic Eruption Locations (source: HIFLD)</h2>
-	<div id="map2" style='width: 100%; height: 500px';></div>
+	<div id="map2" style='width: 100%; height: 500px'></div>
 	
 
 	<script>
@@ -248,7 +264,7 @@
 				    });
     				// Change it back to a pointer when it leaves.
     				map2.on('mouseleave', 'volcano', function () {
-    					map.getCanvas().style.cursor = '';
+    					map.getCanvas().style.cursor = 'pointer';
     				});
     			});
 				map2.on('load', function(){
@@ -275,7 +291,7 @@
 });
 
 </script>
-<div id='remover2'>Toggle Earthquakes OFF</div>
+<div id='remover2'>Toggle Volcanoes OFF</div>
 			<div id='volcano'>Reset Map</div>
 	<p>
 		This dataset represents historical significant volcanic eruptions. A significant eruption is classified as one that meets at least one of the following criteria: caused fatalities, caused moderate damage (approximately $1 million or more), Volcanic Explosivity Index (VEI) of 6 or greater, generated a tsunami, or was associated with a significant earthquake. 
