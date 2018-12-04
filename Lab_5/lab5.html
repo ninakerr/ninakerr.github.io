@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<!--
+  Thank you to https://www.datavizforall.org/leaflet/polygon-tabs/ for the template for the Polygon Map with Multi-year tabs
+-->
+<html>
+<head>
+	<title>Lab 5 - Storymap</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="assets/leaflet/leaflet.css" />
+	<script src="assets/leaflet/leaflet.js"></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="assets/defaultextent/dist/leaflet.defaultextent.css">
+	<script src="assets/defaultextent/dist/leaflet.defaultextent.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="pagestyle.css" />
+	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	<style >
+	#map{
+		width: 100%;
+		height: 500px;
+		background-color: grey;
+	}
+	#map1{
+		width: 100%;
+		height: 500px;
+		background-color: grey;
+	}
+	.info {
+		padding: 6px 8px;
+		font: 14px/16px 'Quicksand', sans-serif;
+		background: white;
+		background: rgba(255,255,255,1);
+		box-shadow: 0 0 15px rgba(0,0,0,0.2);
+		border-radius: 5px;
+	}
+	.info h5 {
+		margin: 0 0 5px;
+		color: #045a8d;
+	}
+	.info h4 {
+		margin: 0 0 5px;
+		color: #777;
+	}
+	.legend {
+		line-height: 18px;
+		color: #555;
+	}
+	.legend i {
+		width: 100%;
+		height: 18px;
+		float: left;
+		margin-right: 8px;
+		opacity: 0.7;
+	}
+	img.resize {
+		max-width:300px;
+		max-height:300px;
+	}
+	img.resize2 {
+		max-width:1000px;
+		max-height:600px;
+	}
+</style>
+</head>
+<body class="is-preload">
+
+
+	<!-- Header -->
+	<section class="wrapper style1 align-center">
+		<div class="inner">
+		
+			<h1>The Center of the Housing Bust<br> is Booming Once Again</h1>
+			<h2> Is it a warning sign?</h2>
+										 <div class="row">
+  <div class="column">
+    <img src="homes.jpg" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="foreclosure.jpg" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="scenic.jpg" style="width:100%">
+  </div>
+</div> <br>
+			<section>
+				<p style='text-align: left;'>
+
+				
+					A housing bubble is when prices for houses rise rapidly because of demand and a limited supply or supply that can't keep up with the demand. Speculators enter market, further driving up demand. At some point, the demand decreases or stagnates at the same time that the supply increases. That results in a sharp drop in prices and the bubble bursts. <br><br>
+
+					The U.S housing bubble started in 2003, with peak prices occuring in 2006. During this time, metro areas saw  huge increases in housing prices. Prices for homes in Las Vegas went up over 80%! New jobs, high profits, and generous mortgage lenders made for risky investments and unreasonable loans. When the housing bubble burst in 2008, homes prices plummeted, deby soared, and many were forced to give up their homes. At the peak of the crisis, one in three homes were in foreclosure.<br><br>
+					
+					Using data from Zillow.com, the maps below show a time-sequence of forclosures and median home prices in Las Vegas nieghborhoods. While forclosures went down significantly in earlier years during recovery from the market crash, data shows increases occuring again as mortgages skyrocket. The second map shows a significant increase in median home-price in a 6-year period with some neighborhoods in the $300,000+ range.
+
+					 
+
+				</p>
+			</section>
+			<section>
+							 <div class="row">
+  <div class="column">
+    <img src="" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="" style="width:100%">
+  </div>
+	
+						
+					</section>
+					<h2>Median Home Prices </h2>
+			<h3> Single-family Residences in Las Vegas</h3>
+			<iframe src="medianpricemap.html" style="width: 100%;height: 550px;background-color: grey;"></iframe>
+					
+			<sub> 
+<a href="https://www.zillow.com/research/data/">Data Collected from Zillow Research</a></sub>
+			<br><br>
+			
+			<p style='text-align: left;'>
+				
+					10 year later, Vegas has risen from the ashes; the economy is growing, companies are hiring, and the housing market is hot. Prices are up more than 135 percent from the depths of the crisis, rising almost three times as fast as the national average, according to the analytics firm Black Knight. Will the good times be too good again? As the city expands further into the desert, new home builds are ever present. Will supply outpace demand again? Will the rapid increase in median home prices signal disaster in the future for home-owners expecting big profits? 
+<br>
+ <div class="column2">
+    <img src="overvaluedgraphic.png" style="width:400px" height="350">
+
+ <br>
+  
+  <br>
+			<!-- median price map -->
+
+			<h2>Foreclosures per 10k homes</h2>
+			<h3> Single-family Residences in Las Vegas</h3>
+			<iframe src="choroplethmap.html" style="width: 100%;height: 550px;background-color: grey;"></iframe>
+			<sub> 
+			<section>
+					<sub> 
+<a href="https://www.zillow.com/research/data/">Data Collected from Zillow Research</a></sub>
+				
+				
+			</section>
+
+
+						
+				
+			</div>  
+		</section>
+
+		
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+	</body>
+	</html>
