@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset='utf-8' />
+      <title>2018 Annual Report</title>
+      <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+      <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet'>
+      <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+      <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+
+      <style>
+
+        body {
+          color:#404040;
+          font:400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+          margin:0;
+          padding:0;
+          -webkit-font-smoothing:antialiased;
+        }
+
+        * {
+          -webkit-box-sizing:border-box;
+          -moz-box-sizing:border-box;
+          box-sizing:border-box;
+        }
+
+        .sidebar {
+          position:absolute;
+          width:33.3333%;
+          height:100%;
+          top:0;left:0;
+          overflow:hidden;
+          border-right:1px solid rgba(0,0,0,0.25);
+        }
+        .pad2 {
+          padding:20px;
+        }
+
+        .map {
+          position:absolute;
+          left:33.3333%;
+          width:66.6666%;
+          top:0;bottom:0;
+        }
+
+        h1 {
+          font-size:22px;
+          margin:0;
+          font-weight:400;
+          line-height: 20px;
+          padding: 20px 2px;
+        }
+
+        a {
+          color:#404040;
+          text-decoration:none;
+        }
+
+        a:hover {
+          color:#737373;
+        }
+
+        .heading {
+          background:#fff;
+          border-bottom:1px solid #eee;
+          min-height:60px;
+          line-height:60px;
+          padding:0 10px;
+          background-color: #122a12;
+          color: #fff;
+        }
+
+        .listings {
+          height:100%;
+          overflow:auto;
+          padding-bottom:60px;
+        }
+
+        .listings .item {
+          display:block;
+          border-bottom:1px solid #eee;
+          padding:10px;
+          text-decoration:none;
+        }
+
+        .listings .item:last-child { border-bottom:none; }
+        .listings .item .title {
+          display:block;
+          color:#265926;
+          font-weight:700;
+        }
+
+        .listings .item .title small { font-weight:400; }
+        .listings .item.active .title,
+        .listings .item .title:hover { color:#a3b33a; }
+        .listings .item.active {
+          background-color:#f8f8f8;
+        }
+        ::-webkit-scrollbar {
+          width:3px;
+          height:3px;
+          border-left:0;
+          background:rgba(0,0,0,0.1);
+        }
+        ::-webkit-scrollbar-track {
+          background:none;
+        }
+        ::-webkit-scrollbar-thumb {
+          background:#00853e;
+          border-radius:0;
+        }
+
+          .marker {
+            background-image: url('mapbox-icon.png');
+            background-size: cover;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .clearfix { display:block; }
+        .clearfix:after {
+          content:'.';
+          display:block;
+          height:0;
+          clear:both;
+          visibility:hidden;
+        }
+
+        /* Marker tweaks */
+        .mapboxgl-popup {
+          padding-bottom: 50px;
+        }
+        .mapboxgl-popup-content {
+          font:400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+          padding:0;
+          width:200px;
+        }
+        .mapboxgl-popup-content-wrapper {
+          padding:10%;
+        }
+        .mapboxgl-popup-content h3 {
+          background:#a3b33a;
+          color:#fff;
+          margin:0;
+          display:block;
+          padding:10px;
+          border-radius:3px 3px 0 0;
+          font-weight:700;
+          margin-top:-15px;
+        }
+
+        .mapboxgl-popup-content h4 {
+          margin:0;
+          display:block;
+          padding: 10px 10px 10px 10px;
+          font-weight:400;
+        }
+
+        .mapboxgl-popup-content div {
+          padding:10px;
+        }
+
+        .mapboxgl-container .leaflet-marker-icon {
+          cursor:pointer;
+        }
+
+        .mapboxgl-popup-anchor-top > .mapboxgl-popup-content {
+          margin-top: 15px;
+        }
+
+        .mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
+          border-bottom-color: #a3b33a;
+        }
+      </style>
+  </head>
+
+  <body>
+    <div class='sidebar'>
+      <div class='heading'>
+        <h1>Earth Economics 2018 Project Locations</h1>
+      </div>
+    <div id='listings' class='listings'></div>
+    </div>
+    <div id='map' class='map'> </div>
+
+  <script>
+  // This will let you use the .remove() function later on
+  if (!('remove' in Element.prototype)) {
+    Element.prototype.remove = function() {
+      if (this.parentNode) {
+          this.parentNode.removeChild(this);
+      }
+    };
+  }
+
+mapboxgl.accessToken = 'pk.eyJ1IjoibmtlcnIwODAzIiwiYSI6ImNqZ2NzajFzcjJ3cncyeHQ1cHNwdWcycnEifQ.UiE1-IaevC2KYyN63XDQxw';
+
+const map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/nkerr0803/cjtet4k7058ow1fqryotnoeur',
+center: [-97.594572, 35.421383],
+zoom: 3.0
+});
+map.addControl(new mapboxgl.NavigationControl({ position:'top-left'}));
+
+ var geojson = {
+    "type": "FeatureCollection",
+    "features": [{
+         "type": "Feature",
+         "geometry": {
+             "type": "Point",
+             "coordinates": [-123.07708740234374,
+          48.53661318127798]
+         },
+         "properties": {
+             "title": "The Whales in our Waters: The Economic Contribution of Whale Watching in San Juan County",
+             "URL":"http://www.eartheconomics.org/s/SRKW_EarthEconomics_Jan2019-Digital-954m.pdf",
+             "blurb": "To better understand the economic incentives to invest in Southern Resident Killer Whale (SRKW) recovery, Earth Economics conducted an economic contribution analysis to estimate the value of whale watching in San Juan County.",
+             "description": "San Juan County, WA",
+             "image": "images/san_juan.jpeg"
+         }
+     },
+     {
+         "type": "Feature",
+         "geometry": {
+         "type": "Point",
+         "coordinates": [-122.79968261718749,
+          38.41055825094609]
+        },
+         "properties": {
+             "title": "Healthy Lands and Healthy Economies: The Multiple Benefits of Sonoma County Working and Natural Lands",
+              "URL":"http://www.eartheconomics.org/all-publications/sonomanaturalcapital",
+              "blurb": "A regional and Sonoma County report that estimates the value of our working and natural lands, our ‘natural capital.’ ",
+             "description": "Sonoma County, CA",
+             "image": "images/Sonoma.jpg"
+         }
+          },
+     {
+         "type": "Feature",
+         "geometry": {
+         "type": "Point",
+         "coordinates": [-122.39730834960938,
+          47.19717795172789]
+        },
+         "properties": {
+             "title": "Ecosystem Services Valuation of Private Forest Lands in Pierce County",
+             "URL":"http://www.eartheconomics.org/all-publications/publicbenefits-privateforests",
+             "blurb": "Forests are among Pierce County's most valuable natural assets, supporting clean water and air, bolstering climate stability, and sustaining local communities.",
+             "description": "Pierce County, WA",
+             "image": 'images/Pierce.jpg'
+         }
+          },
+     {
+         "type": "Feature",
+         "geometry": {
+         "type": "Point",
+         "coordinates": [-105.205078125,
+          38.272688535980976]
+        },
+         "properties": {
+             "title": "Colorado Parks and Wildlife Future Funding Study",
+             "URL":"http://www.eartheconomics.org/all-publications/cpw-future-funding",
+             "blurb": " CPW has a diverse mission: to perpetuate the wildlife resources of the state, to provide a quality state parks system, and to provide enjoyable and sustainable outdoor recreation opportunities that educate and inspire current and future generations to serve as active stewards of Colorado’s natural resources.",
+             "description": "Colorado",
+             "image": 'images/CO.jpg'
+         }
+          },
+     {
+         "type": "Feature",
+         "geometry": {
+         "type": "Point",
+         "coordinates": [-119.794921875,
+          47.45780853075031]
+        },
+         "properties": {
+             "title": "WWRC Field Guides",
+              "URL":"http://www.eartheconomics.org/all-publications/wwrc-fieldguide",
+              "blurb": "Our connection to the outdoors is embedded in the culture of the Pacific Northwest. The splendor of our natural environment beckons us, defines us, and sustains us. The outdoors are a fundamental part of our unique identity.",
+             "description": "Washington",
+             "image": 'images/Field.jpg'
+         }
+          },
+     {
+         "type": "Feature",
+         "geometry": {
+         "type": "Point",
+         "coordinates": [-122.67333984374999,
+          45.521743896993634]
+        },
+         "properties": {
+             "title": "The Natural Value of Forest Park: An Ecosystem Services Valuation of America's Premier Urban Forest",
+              "URL":"https://static1.squarespace.com/static/561dcdc6e4b039470e9afc00/t/5c0ff0771ae6cfab7a0acb6c/1544548472600/TheNaturalValueofForestPark_Aug2018.pdf",
+              "blurb": "Forest Park is a natural asset that provides a broad range of public benefits to Portland residents. The ecosystems within the park sequester carbon, purify the air, filter water, provide habitat for an array of species, and offer unparalleled opportunities for Portland residents to recreate outdoors.",
+             "description": "Portland, OR",
+             "image": 'images/FP.jpg'
+         }
+          },
+     {
+         "type": "Feature",
+         "geometry": {
+         "type": "Point",
+         "coordinates": [-110.9124755859375,
+          31.41460027631321]
+        },
+         "properties": {
+             "title": "The Economic Value of Natural Capital in the Santa Cruz Floodplain",
+             "blurb": "This study values riparian ecosystems along a 23 mile stretch of the Santa Cruz River north of Tucson, Arizona.",
+              "URL":"https://static1.squarespace.com/static/561dcdc6e4b039470e9afc00/t/5c7d3b0c652dea887eb82781/1551711003011/SantaCruzFloodplain_Factsheet_072718-v3.pdf",
+             "description": "Santa Cruz, Arizona",
+             "image": 'images/SantaCruz.jpg'
+         }
+          },
+     {
+         "type": "Feature",
+         "geometry": {
+         "type": "Point",
+         "coordinates": [ -122.31903076171875,
+          47.58764167941513]
+        },
+         "properties": {
+             "title": "The Natural Value of Discovery Park",
+              "URL":"http://www.eartheconomics.org/all-publications/discoverypark",
+              "blurb": "Discovery Park is an important natural asset for the City of Seattle. The park has provided ecosystem benefits for generations, and continues to support a vibrant culture and robust economy today. ",
+             "description": "Seattle, WA",
+             "image": 'images/Discovery.jpg'
+         }
+          },
+     {
+         "type": "Feature",
+         "geometry": {
+         "type": "Point",
+         "coordinates": [-79.57672119140625,
+          8.974610261405399]
+        },
+         "properties": {
+             "title": "The Economic Value of Natural Capital in Panama City's Watersheds and Associated Systems",
+              "URL":"https://static1.squarespace.com/static/561dcdc6e4b039470e9afc00/t/5b75e0df575d1f9b8a8a5d7b/1534451944301/PanamaCity_Handout_062518-English.pdf",
+              "blurb": "The communities within the Panama District rely on benefits provided by 11 ecosystem services, which contribute over $1.6 billion each year in critical ecosystem services from the surrounding watershed.",
+             "description": "Panama City, Panama",
+             "image": 'images/Panama.jpg'
+         }
+          },
+     {
+         "type": "Feature",
+         "geometry": {
+         "type": "Point",
+         "coordinates": [-93.4716796875,
+          45.67548217560647]
+        },
+         "properties": {
+             "title": "The Food that Grows out of the Water",
+              "URL":"http://www.eartheconomics.org/all-publications/manoomin",
+              "blurb": "Wild rice, or manoomin, is central to Ojibwe cultural identity, spiritual traditions, and physical well-being. It is an important species to the ecology of Minnesota’s lakes and rivers and provides critical food and habitat to both endemic and migratory species.",
+             "description": "Minnesota",
+             "image": 'images/MN.jpg'
+         }
+            },
+     
+     {
+         "type": "Feature",
+         "geometry": {
+         "type": "Point",
+         "coordinates": [-121.83151245117186,
+          47.97797210710751]
+        },
+         "properties": {
+             "title": "The Natural Value of Meadowdale Beach Park: A Benefit-Cost Analysis of the Meadowdale Beach Park and Estuary Restoration Project",
+              "URL":"https://static1.squarespace.com/static/561dcdc6e4b039470e9afc00/t/5b352bc76d2a73fcad037989/1530211280187/EarthEconomics_Meadowdale-BenefitAnalysisReport.pdf",
+              "blurb": "Meadowdale Beach Park is a natural asset that provides a broad range of public benefits to Snohomish County residents. The ecosystems provide habitat for an array of species, the trails and beach are a huge draw for recreational visitors.",
+             "description": "Snohomish County, WA",
+             "image": 'images/Meadowdale.jpg'
+     
+         }
+            },
+     {
+         "type": "Feature",
+         "geometry": {
+         "type": "Point",
+         "coordinates": [-121.75598144531251,
+          48.82494916931076]
+        },
+         "properties": {
+             "title": "Gem of the Emerald Corridor: Nature's Value in the Mt.Baker - Snoqualmie National Forest",
+              "URL":"https://static1.squarespace.com/static/561dcdc6e4b039470e9afc00/t/5b8067600e2e72fa78e92960/1535141767581/GemoftheEmeraldCorridor_EarthEconomics_May2018.pdf",
+              "blurb": "This study aims to highlight the relationship between providers and beneficiaries of natural capital by estimating the economic benefits provided by the natural environment of the Mt. Baker-Snoqualmie National Forest (MBSNF) to the Emerald Corridor.",
+             "description": "Mt.Baker - Snoqualmie National Forest",
+             "image": 'images/Baker.jpg'
+         }
+     }]
+};
+  // This adds the data to the map
+  map.on('load', function (e) {
+    // This is where your '.addLayer()' used to be, instead add only the source without styling a layer
+    map.addSource("places", {
+      "type": "geojson",
+      "data": geojson
+    });
+    // Initialize the list
+    buildLocationList(geojson);
+
+  });
+
+  // This is where your interactions with the symbol layer used to be
+  // Now you have interactions with DOM markers instead
+  geojson.features.forEach(function(marker, i) {
+    // Create an img element for the marker
+    var el = document.createElement('div');
+    el.id = "marker-" + i;
+    el.className = 'marker';
+    // Add markers to the map at all points
+    new mapboxgl.Marker(el, {offset: [0, -23]})
+        .setLngLat(marker.geometry.coordinates)
+        .addTo(map);
+
+    el.addEventListener('click', function(e){
+        // 1. Fly to the point
+        flyToStore(marker);
+
+        // 2. Close all other popups and display popup for clicked store
+        createPopUp(marker);
+
+        // 3. Highlight listing in sidebar (and remove highlight for all other listings)
+        var activeItem = document.getElementsByClassName('active');
+
+        e.stopPropagation();
+        if (activeItem[0]) {
+           activeItem[0].classList.remove('active');
+        }
+
+        var listing = document.getElementById('listing-' + i);
+        listing.classList.add('active');
+
+    });
+  });
+
+
+  function flyToStore(currentFeature) {
+    map.flyTo({
+        center: currentFeature.geometry.coordinates,
+        zoom: 4.5
+      });
+  }
+
+  function createPopUp(currentFeature) {
+    var popUps = document.getElementsByClassName('mapboxgl-popup');
+    if (popUps[0]) popUps[0].remove();
+
+
+    var popup = new mapboxgl.Popup({closeonClick: true})
+          .setLngLat(currentFeature.geometry.coordinates)
+          .setHTML('<h3><a href="' + currentFeature.properties.URL + '">' + currentFeature.properties.title + '</a></h3><h4>' + currentFeature.properties.blurb + '</p></h4>'+'<img src="'+ currentFeature.properties.image +'" style="width:200px;height:100px;">')
+          .addTo(map);
+  }
+
+
+  function buildLocationList(data) {
+    for (i = 0; i < data.features.length; i++) {
+      var currentFeature = data.features[i];
+      var prop = currentFeature.properties;
+
+      var listings = document.getElementById('listings');
+      var listing = listings.appendChild(document.createElement('div'));
+      listing.className = 'item';
+      listing.id = "listing-" + i;
+
+      var link = listing.appendChild(document.createElement('a'));
+      link.href = '#';
+      link.className = 'title';
+      link.dataPosition = i;
+      link.innerHTML = prop.title;
+
+      var details = listing.appendChild(document.createElement('div'));
+      details.innerHTML = prop.description;
+      //add project blurb here
+
+
+
+      link.addEventListener('click', function(e){
+        // Update the currentFeature to the store associated with the clicked link
+        var clickedListing = data.features[this.dataPosition];
+
+        // 1. Fly to the point
+        flyToStore(clickedListing);
+
+        // 2. Close all other popups and display popup for clicked store
+        createPopUp(clickedListing);
+
+        // 3. Highlight listing in sidebar (and remove highlight for all other listings)
+        var activeItem = document.getElementsByClassName('active');
+
+        if (activeItem[0]) {
+           activeItem[0].classList.remove('active');
+        }
+        this.parentNode.classList.add('active');
+
+      });
+    }
+  }
+
+
+    </script>
+  </body>
+</html>
+
