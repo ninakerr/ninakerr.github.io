@@ -1,5 +1,5 @@
 @import url("font-awesome.min.css");
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic");
+@import url("https://fonts.googleapis.com/css?family=Catamaran&display=swap");
 
 /*
 	Strata by HTML5 UP
@@ -99,7 +99,7 @@ input, select, textarea {
 
 	body, input, select, textarea {
 		color: #a2a2a2;
-		font-family: "Source Sans Pro", Helvetica, sans-serif;
+		font-family: 'Catamaran', sans-serif;
 		font-size: 16pt;
 		font-weight: 400;
 		line-height: 1.75em;
@@ -2571,20 +2571,20 @@ input, select, textarea {
 		-webkit-justify-content: space-between;
 		-ms-justify-content: space-between;
 		justify-content: space-between;
-		background-color: white;
-		background-attachment: scroll,								scroll;
-		background-image: url("images/overla.png"), url("../../images/bg2.jpg");
+		background-color: #002f35;
+		background-attachment: scroll,								fixed;
+		background-image: url("images/overla.png"), url("../../images/bg3.jpg");
 		background-position: left,							left;
 		background-repeat: no-repeat,								no-repeat;
-		background-size: cover,								fill;
+		background-size: cover,								cover;
 		color: rgba(255, 255, 255, 0.5);
 		height: 100%;
 		left: 0;
-		padding: 8em 4em;
+		padding: 5em 4em;
 		position: fixed;
 		text-align: right;
 		top: 0;
-		width: 35%;
+		width: 25%;
 	}
 
 		#header > * {
