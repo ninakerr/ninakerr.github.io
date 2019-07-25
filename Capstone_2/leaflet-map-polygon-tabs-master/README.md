@@ -3,6 +3,7 @@ Leaflet thematic polygon map, with hover info, tabs to display time periods, and
 
 ## Demo
 https://datavizforall.github.io/leaflet-map-polygon-tabs
+ninakerr.github.io/capstone/leaflet-map-polygon-tabs/inde.html
 
 ## Credits
 - Map design by [@alvinschang](https://github.com/alvinschang) Connecticut Mirror http://ctmirror.org
