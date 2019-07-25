@@ -87,13 +87,13 @@ info.onAdd = function (map) {
     return this._div;
 };
 
-// // Edit info box labels (such as props.town) to match properties of the GeoJSON data
-// info.update = function (props) {
-//   var winName =
-//   this._div.innerHTML = (props ?
-//     '<div class="areaName">' + props.town + '</div>' : '<div class="areaName faded"><small>Hover over areas<br>Click tabs or arrow keys</small></div>') + '<div class="areaLabel"><div class="areaValue">Home Value Index</div>' +(props ? '' + (checkNull(props["index" + year])) : '--') + '</div>';
-// };
-// info.addTo(map);
+// Edit info box labels (such as props.town) to match properties of the GeoJSON data
+info.update = function (props) {
+  var winName =
+  this._div.innerHTML = (props ?
+    '<div class="areaName">' + props.zip + '</div>' : '<div class="areaName faded"><small>Hover over areas<br>Click tabs or arrow keys</small></div>') + '<div class="areaLabel"><div class="areaValue">Home Value Index</div>' +(props ? '' + (checkNull(props["index" + year])) : '--') + '</div>';
+};
+info.addTo(map);
 
 // When a new tab is selected, this changes the year displayed
 $(".tabItem").click(function() {
