@@ -4,7 +4,7 @@ var tabs = 11;
 
 // Edit the center point and zoom level
 var map = L.map('map', {
-  center: [41.79, -72.6],
+  center: [36.16, -115.13],
   zoom: 10,
   scrollWheelZoom: false
 });
@@ -29,13 +29,16 @@ $.getJSON("town-home-value-index.geojson", function (data) {
 // Edit range cutoffs and colors to match your data; see http://colorbrewer.org
 // Any values not listed in the ranges below displays as the last color
 function getColor(d) {
-  return d > 2.0 ? '#006d2c' :
-         d > 1.5 ? '#31a354' :
-         d > 1.0 ? '#74c476' :
-         d > 0.5 ? '#bae4b3' :
-         d > 0.1 ? '#edf8e9' :
+ return d > 300000? '#7a0177' :
+         d > 250000? '#ae017e' :
+         d > 220000? '#dd3497' :
+         d > 180000? '#f768a1' :
+         d > 120000 ? '#fa9fb5' :
+         d > 85000 ? '#fcc5c0' :
+         d > 0 ? '#feebe2' :
                    'white' ;
 }
+
 
 // Edit the getColor property to match data properties in your GeoJSON file
 // In this example, columns follow this pattern: index1910, index1920...
@@ -106,7 +109,7 @@ $(".tabItem").click(function() {
 var legend = L.control({position: 'bottomright'});
 legend.onAdd = function (map) {
   var div = L.DomUtil.create('div', 'info legend'),
-    grades = [0.1, 0.5, 1.0, 1.5, 2],
+    grades = [0, 2, 4, 6, 8],
     labels = [],
     from, to;
   for (var i = 0; i < grades.length; i++) {
