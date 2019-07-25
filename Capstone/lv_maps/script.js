@@ -1,5 +1,5 @@
 // Edit the initial year and number of tabs to match your GeoJSON data and tabs in index.html
-var year = "2015";
+var year = "2001";
 var tabs = 4;
 
 // Edit the center point and zoom level
