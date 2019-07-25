@@ -1,5 +1,5 @@
 // Edit the initial year and number of tabs to match your GeoJSON data and tabs in index.html
-var year = "1910";
+var year = "2001";
 var tabs = 11;
 
 // Edit the center point and zoom level
@@ -84,13 +84,13 @@ info.onAdd = function (map) {
     return this._div;
 };
 
-// Edit info box labels (such as props.town) to match properties of the GeoJSON data
-info.update = function (props) {
-  var winName =
-  this._div.innerHTML = (props ?
-    '<div class="areaName">' + props.town + '</div>' : '<div class="areaName faded"><small>Hover over areas<br>Click tabs or arrow keys</small></div>') + '<div class="areaLabel"><div class="areaValue">Home Value Index</div>' +(props ? '' + (checkNull(props["index" + year])) : '--') + '</div>';
-};
-info.addTo(map);
+// // Edit info box labels (such as props.town) to match properties of the GeoJSON data
+// info.update = function (props) {
+//   var winName =
+//   this._div.innerHTML = (props ?
+//     '<div class="areaName">' + props.town + '</div>' : '<div class="areaName faded"><small>Hover over areas<br>Click tabs or arrow keys</small></div>') + '<div class="areaLabel"><div class="areaValue">Home Value Index</div>' +(props ? '' + (checkNull(props["index" + year])) : '--') + '</div>';
+// };
+// info.addTo(map);
 
 // When a new tab is selected, this changes the year displayed
 $(".tabItem").click(function() {
