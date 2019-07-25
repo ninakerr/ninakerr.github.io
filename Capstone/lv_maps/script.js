@@ -19,7 +19,7 @@ new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png
 }).addTo(map);
 
 // Edit to upload GeoJSON data file from your local directory
-$.getJSON("vegas_var.json", function (data) {
+$.getJSON("vegas_var2.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
     style: style,
     onEachFeature: onEachFeature
@@ -29,11 +29,13 @@ $.getJSON("vegas_var.json", function (data) {
 // Edit range cutoffs and colors to match your data; see http://colorbrewer.org
 // Any values not listed in the ranges below displays as the last color
 function getColor(d) {
-  return d > 8 ? '#b30000' :
-         d > 6 ? '#e34a33' :
-         d > 4 ? '#fc8d59' :
-         d > 2 ? '#fdcc8a' :
-         d > 0 ? '#fef0d9' :
+  return d > 300000? '#7a0177' :
+         d > 250000? '#ae017e' :
+         d > 220000? '#dd3497' :
+         d > 180000? '#f768a1' :
+         d > 120000 ? '#fa9fb5' :
+         d > 85000 ? '#fcc5c0' :
+         d > 0 ? '#feebe2' :
                    'white' ;
 }
 
@@ -88,7 +90,7 @@ info.onAdd = function (map) {
 info.update = function (props) {
   var winName =
   this._div.innerHTML = (props ?
-    '<div class="areaName">' + props.town + '</div>' : '<div class="areaName faded"><small>Hover over areas<br>Click tabs or arrow keys</small></div>') + '<div class="areaLabel"><div class="areaValue">Foreclosures <br> (per 10k homes)</div>' +(props ? '' + (checkNull(props["index" + year])) : '--') + '</div>';
+    '<div class="areaName">' + props.zip + '</div>' : '<div class="areaName faded"><small>Hover over areas<br>Click tabs or arrow keys</small></div>') + '<div class="areaLabel"><div class="areaValue">Foreclosures <br> (per 10k homes)</div>' +(props ? '' + (checkNull(props["index" + year])) : '--') + '</div>';
 };
 info.addTo(map);
 
