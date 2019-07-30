@@ -91,7 +91,7 @@ info.onAdd = function (map) {
 info.update = function (props) {
   var winName =
   this._div.innerHTML = (props ?
-    '<div class="areaName">' + props.zip + '</div>' : '<div class="areaName faded"><small>Hover over areas<br>Click tabs or arrow keys</small></div>') + '<div class="areaLabel"><div class="areaValue">Home Value Index</div>' +(props ? '' + (checkNull(props["index" + year])) : '--') + '</div>';
+    '<div class="areaName">' + props.ZIP_code + '</div>' : '<div class="areaName faded"><small>Hover over areas<br>Click tabs or arrow keys</small></div>') + '<div class="areaLabel"><div class="areaValue">Average Home Value</div>' +(props ? '' + (checkNull(props["index" + year])) : '--') + '</div>';
 };
 info.addTo(map);
 
@@ -109,7 +109,7 @@ $(".tabItem").click(function() {
 var legend = L.control({position: 'bottomright'});
 legend.onAdd = function (map) {
   var div = L.DomUtil.create('div', 'info legend'),
-    grades = [0, 2, 4, 6, 8],
+    grades = [0, "70k", 160000, 200000, 250000, 300000, 400000],
     labels = [],
     from, to;
   for (var i = 0; i < grades.length; i++) {
