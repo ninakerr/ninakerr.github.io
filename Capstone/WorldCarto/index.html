@@ -1,0 +1,412 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<style>
+body {
+	background-color: white;
+
+}
+
+path {
+  fill: #ccc;
+  stroke: #000;
+  shape-rendering: optimizeSpeed;
+}
+
+text {
+	font-family: verdana;
+	font-size: 11pt;
+	fill: black;
+}
+
+circle {
+	fill: rgb(0,115,130);
+	cursor: pointer;
+	stroke: white;
+	stroke-width: 2.2px;
+}
+
+.container {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	padding-bottom: 57%;
+	vertical-align: middle;
+	overflow: hidden;
+}
+
+.content {
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/*@font-face {
+    font-family: myriadproregular;
+    src: url("myriadproregular.woff") format("woff");
+}
+
+body {
+	background-color: rgb(255,255,255);
+
+}
+
+path {
+  fill: #ccc;
+  stroke: #000;
+  shape-rendering: optimizeSpeed;
+}
+
+.axis path, .axis line {
+	opacity: 0;
+}
+
+text {
+	font-family: verdana;
+	font-size: 11pt;
+
+	
+	fill: rgb(230,230,230);
+}
+
+
+
+circle {
+	fill: rgb(80,80,255);
+	cursor: pointer;
+	stroke: white;
+	stroke-width: 2.2px;
+}
+
+
+
+.countrytext {
+	font-size:16pt;
+}
+
+
+.tooltip {
+	font-family: verdana;
+	position: absolute;
+        display: block;
+	opacity: 0;
+        color: white;
+        background-color: rgb(20,20,20);
+        padding: 3px 6px 6px 6px;
+        pointer-events: none;
+        border-radius: 2px;
+	z-index: 1000;
+}
+
+.tooltip2 {
+	margin: 3px;
+	padding: 0px;
+	font-size: 12pt;
+	font-weight: 600;
+	width:100%;
+	display: inline;
+}
+
+.tooltip3, .tooltip4 {
+	margin: 3px;
+	padding: 0px;
+	font-size: 10pt;
+	font-weight: 400;
+}
+
+.box {
+	position: absolute;
+	text-align: center;
+	background-color: transparent;
+	top: 20px;
+	left: 0px;
+	width: 350px;
+	height: 100px;
+        margin: 0px;
+        padding: 0px;
+
+}
+
+.pagetitle {
+	opacity: 1;
+	font-family: verdana;
+	font-size: 19pt;
+	position: relative;
+	text-align: center;
+	font-weight: 900;
+        color: rgb(230,230,230);
+        background-color: transparent;
+        pointer-events: none;
+        margin: 0px;
+        padding: 0px;
+      
+}
+
+.amount {
+	font-family: verdana; 
+        margin: 0px;
+        padding: 0px;
+        font-size: 20pt;
+        fill: orange;
+        font-weight: 900;
+
+}
+.total {
+	opacity: 0;
+	position: relative;
+	text-align: center;
+	top: 0px;
+	font-family: verdana;
+	font-size: 10pt;
+	font-weight: 100;
+	color: rgb(230,230,230);
+	text-shadow: none;
+        margin: 0px;
+        padding: 0px;
+}
+.measure {
+
+	font-family: verdana;
+	text-align: center;
+	font-size: 18pt;
+	position: absolute;
+
+	left: 600px;
+        color: black;
+        background-color: transparent;
+        width: 100%;
+        
+}
+
+.container {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	padding-bottom: 57%;
+	vertical-align: middle;
+	overflow: hidden;
+}
+
+.content {
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	left: 0;
+}*/
+
+</style>
+<title>Animated Cartogram Example - Metrocosm</title>
+</head>
+<body>
+<script src="https://metrocosm.com/js/d3.v3.min.js"></script>
+<script src="https://metrocosm.com/js/d3.geo.projection.min.js"></script>
+<script src="https://metrocosm.com/js/pym.js"></script>
+
+
+<div style="padding-left:50px;padding-right:50px;padding-top:0px;">
+<div class="container">
+	<svg version="1.1" viewBox="0 0 1040 600" preserveAspectRatio="xMinYMin meet" class="content">
+	</svg>
+</div>
+</div>
+
+<script>
+
+
+var pymChild = null;  //******this plugin is for making dynamic iframes - unrelated to the mapping
+
+
+
+var width = 1000;
+var height = 570;
+
+var svg = d3.select("svg");
+
+var projection = d3.geo.miller()
+    .scale(140)
+    .translate([width / 2 + 60, height / 2 + 80])
+    .center([30.6, 13.9])
+    .precision(.1);
+
+
+d3.json("Access-Control-Allow-Origin:http://metrocosm.com/world-base-map.geojson", function(polygon) {
+d3.csv("Access-Control-Allow-Origin:http://metrocosm.com/gridout2100.csv", function(error, shift1) { 
+
+
+	
+	var countries = polygon.features.length;
+
+	function modifypoly(polyline,shift){   //	***********create cartogram using deformation grid************
+		var l1 = polyline;
+		var len = l1.length;
+		var i;
+		var j;
+		temparr = [];
+		resultarr = [];
+
+		var xintermed1;
+		var xintermed2;
+		var yintermed1;
+		var yintermed2;
+		var xfinal;
+		var yfinal;
+			
+		var xinterp = d3.scale.linear();
+		var yinterp = d3.scale.linear();
+				
+			for (j = 0; j < len; j++){    //*****adjust the points one-by-one*****
+				
+				var x1y1 = (Math.floor(l1[j][1]*50/180) + 50)*100 + Math.floor(l1[j][0]*50/180) + 50;
+				var x1y2 = (Math.floor(l1[j][1]*50/180) + 50 + 1)*100 + Math.floor(l1[j][0]*50/180) + 50;		
+				var x2y1 = (Math.floor(l1[j][1]*50/180) + 50)*100 + Math.floor(l1[j][0]*50/180) + 50 + 1;
+				var x2y2 = (Math.floor(l1[j][1]*50/180) + 50 + 1)*100 + Math.floor(l1[j][0]*50/180) + 50 + 1;				
+				
+
+				xinterp
+					.domain([Math.floor(l1[j][0]*50/180), Math.floor(l1[j][0]*50/180)+1])
+					.range([shift[x1y1].dx,shift[x2y1].dx]);
+				xintermed1 = xinterp(l1[j][0]*50/180);
+
+				xinterp
+					.range([shift[x1y2].dx,shift[x2y2].dx]);
+				xintermed2 = xinterp(l1[j][0]*50/180);
+					
+				xinterp
+					.range([shift[x1y1].dy,shift[x2y1].dy]);
+				yintermed1 = xinterp(l1[j][0]*50/180);	
+												
+				xinterp
+					.range([shift[x1y2].dy,shift[x2y2].dy]);
+				yintermed2 = xinterp(l1[j][0]*50/180);				
+				
+
+				
+				yinterp
+					.domain([Math.floor(l1[j][1]*50/180), Math.floor(l1[j][1]*50/180) + 1])
+					.range([xintermed1,xintermed2]);
+				xfinal = +yinterp(l1[j][1]*50/180);
+				
+				yinterp					
+					.range([yintermed1,yintermed2]);
+				yfinal = +yinterp(l1[j][1]*50/180);
+
+				l1[j][0] = +l1[j][0] + xfinal;
+				l1[j][1] = +l1[j][1] + yfinal;
+				
+				if (l1[j][0] > 180){l1[j][0] = 179.99;}
+				if (l1[j][1] > 180){l1[j][1] = 179.99;}
+				if (l1[j][0] > 180){l1[j][0] = 179.99;}
+				if (l1[j][1] > 180){l1[j][1] = 179.99;}				
+			}
+			
+		return l1;				
+	}
+	
+	
+	
+	var k = -1;
+	var temppolygon = JSON.parse(JSON.stringify(polygon));   //make a copy of the basemap
+	var polygon2 = JSON.parse(JSON.stringify(polygon));		
+
+	while (k++ < (countries - 1)) {	  //***************deform the countries one-by-one
+		  polygon2.features[k].geometry.coordinates[0] = modifypoly(temppolygon.features[k].geometry.coordinates[0],shift1);		  
+	}
+
+	k = -1;
+	while (k++ < (countries - 1)) {     //****************convert geographic coordinates to SVG coordinates to prevent D3 from resampling
+		  polygon.features[k].geometry.coordinates[0] = polygon.features[k].geometry.coordinates[0].map(projection);
+		  polygon2.features[k].geometry.coordinates[0] = polygon2.features[k].geometry.coordinates[0].map(projection);	
+	}
+	
+	
+	
+	svg.selectAll("circle")
+                .data([1,2])
+                .enter()
+                .append("circle")
+		.attr("class", function(d){
+			return "circle circle" + d;
+		})
+		.attr("r",20)
+		.attr("cx", function(d){
+			return 450 + 80*(d-1);
+		})
+		.attr("cy",40)
+		.on("click", function(d){
+			mapshift(d);
+		});
+
+	d3.select(".circle1")
+		.style("fill","orange")
+		.attr("r",24);
+
+	
+	function mapshift(n) {		//switch maps
+		
+		d3.selectAll(".circle")
+			.transition()
+			.duration(500)
+			.style("fill","rgb(80,80,255)")
+			.attr("r",20);
+			
+		d3.select(".circle" + n)
+			.transition()
+			.duration(500)
+			.style("fill","orange")
+			.attr("r",24);
+	
+		if (n==1) {map1();}
+		if (n==2) {map2();}
+
+	}
+
+
+	svg.append("text")
+		.attr("x", 450)
+		.attr("y",78)
+		.attr("text-anchor","middle")
+		.text("Map 1");
+
+	svg.append("text")
+		.attr("x", 450 + 80)
+		.attr("y",78)
+		.attr("text-anchor","middle")
+		.text("Map 2");
+	
+					
+	var pathn = d3.geo.path().projection(null);
+
+	var worldmap = svg.selectAll("path")      //plot the map
+	           .data(polygon.features)
+	           .enter()
+	           .append("path")
+	           .attr("d", pathn)
+	           .style("stroke", "rgb(50,50,50)")
+	           .style("stroke-width", 0.6);
+	      
+
+	map1();
+                              //************map transitions*********************
+	function map1(){
+		worldmap.data(polygon.features).transition().duration(2000).attr("d", pathn);
+			
+	}
+	function map2(){
+		worldmap.data(polygon2.features).transition().duration(2000).attr("d", pathn);
+			
+	}
+	  	  
+});
+});
+
+pymChild = new pym.Child();
+
+</script>
+</body>
+
+</html>
