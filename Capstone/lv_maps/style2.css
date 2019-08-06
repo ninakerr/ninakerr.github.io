@@ -28,7 +28,7 @@ In this example, width = 9% for 10 tabs + cell borders */
     font-size: 15px;
     font-weight: normal;
     text-transform: uppercase;
-    color: #6e016b;
+    color: #0c2c84;
 }
 .tabItem:first-child {
     border-radius: 7px 0px 0 7px;
@@ -42,7 +42,7 @@ In this example, width = 9% for 10 tabs + cell borders */
     border-right: 1px solid #aaa;
 }
 .tabItem:hover {
-    color: #6e016b;
+    color: #0c2c84;
 }
 .tabItem.selected {
     color: black;
