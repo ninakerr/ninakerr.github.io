@@ -5,7 +5,7 @@ var tabs = 4;
 // Edit the center point and zoom level
 var map = L.map('map', {
   center: [36.16, -115.1],
-  zoom: 10,
+  zoom: 9.7,
   scrollWheelZoom: false
 });
 
@@ -14,7 +14,7 @@ map.attributionControl
 .setPrefix('View <a href="http://github.com/jackdougherty/leaflet-map-polygon-tabs">data and code on GitHub</a>, created with <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>; design by <a href="http://ctmirror.org">CT Mirror</a>');
 
 // Basemap layer
-new L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+new L.tileLayer('http://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
 }).addTo(map);
 
