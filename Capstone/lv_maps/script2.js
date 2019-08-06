@@ -29,13 +29,13 @@ $.getJSON("vegas_new_2.json", function (data) {
 // Edit range cutoffs and colors to match your data; see http://colorbrewer.org
 // Any values not listed in the ranges below displays as the last color
 function getColor(d) {
-  return d > 300000? '#6e016b' :
-         d > 270000? '#88419d' :
-         d > 220000? '#8c6bb1' :
-         d > 170000? '#8c96c6' :
-         d > 120000 ? '#9ebcda' :
-         d > 80000 ? '#bfd3e6' :
-         d > 50000 ? '#edf8fb' :
+  return d > 300000? '#0c2c84' :
+         d > 270000? '#225ea8' :
+         d > 220000? '#1d91c0' :
+         d > 170000? '#41b6c4' :
+         d > 120000 ? '#7fcdbb' :
+         d > 80000 ? '#c7e9b4' :
+         d > 50000 ? '#ffffcc' :
          d > 0 ? '#feebe2' :
                    'white' ;
 }
