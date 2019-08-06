@@ -29,12 +29,12 @@ $.getJSON("vegas_new_2.json", function (data) {
 // Edit range cutoffs and colors to match your data; see http://colorbrewer.org
 // Any values not listed in the ranges below displays as the last color
 function getColor(d) {
-  return d >  300000? '#7a0177' :
-         d > 250000? '#ae017e' :
-         d > 220000? '#dd3497' :
-         d > 180000? '#f768a1' :
-         d > 120000 ? '#fa9fb5' :
-         d > 85000 ? '#fcc5c0' :
+  return d >  300000? '#810f7c' :
+         d > 250000? '#8856a7' :
+         d > 220000? '#8c96c6' :
+         d > 180000? '#9ebcda' :
+         d > 120000 ? '#bfd3e6' :
+         d > 85000 ? '#edf8fb' :
          d > 0 ? '#feebe2' :
                    'white' ;
 }
@@ -47,7 +47,7 @@ function style(feature) {
     weight: 1,
     opacity: 1,
     color: 'black',
-    fillOpacity: 0.9
+    fillOpacity: 0.6
   };
 }
 
