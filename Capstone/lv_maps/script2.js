@@ -29,10 +29,10 @@ $.getJSON("vegas_new_2.json", function (data) {
 // Edit range cutoffs and colors to match your data; see http://colorbrewer.org
 // Any values not listed in the ranges below displays as the last color
 function getColor(d) {
-  return d > 300000? '#810f7c' :
-        
-         d > 230000? '#88419d' :
-         d > 190000? '#8c96c6' :
+  return d > 300000? '#6e016b' :
+         d > 270000? '#88419d' :
+         d > 220000? '#8c6bb1' :
+         d > 170000? '#8c96c6' :
          d > 120000 ? '#9ebcda' :
          d > 80000 ? '#bfd3e6' :
          d > 50000 ? '#edf8fb' :
@@ -48,7 +48,7 @@ function style(feature) {
     weight: 1,
     opacity: 1,
     color: 'black',
-    fillOpacity: 0.6
+    fillOpacity: 0.8
   };
 }
 
@@ -108,7 +108,7 @@ $(".tabItem").click(function() {
 var legend = L.control({position: 'bottomright'});
 legend.onAdd = function (map) {
   var div = L.DomUtil.create('div', 'info legend'),
-    grades = [50000, 80000, 120000, 190000, 230000,300000],
+    grades = [50000, 80000, 120000, 170000, 220000, 270000, 300000],
     labels = [],
     from, to;
   for (var i = 0; i < grades.length; i++) {
