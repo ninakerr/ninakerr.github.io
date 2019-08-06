@@ -89,7 +89,7 @@ In this example, width = 9% for 10 tabs + cell borders */
 }
 /*Edit width of legend*/
 .legend {
-    width: 130px;
+    width: 140px;
     position: absolute;
     right: 0px;
     bottom: 10px;

@@ -29,12 +29,13 @@ $.getJSON("vegas_new_2.json", function (data) {
 // Edit range cutoffs and colors to match your data; see http://colorbrewer.org
 // Any values not listed in the ranges below displays as the last color
 function getColor(d) {
-  return d >  300000? '#810f7c' :
-         d > 250000? '#8856a7' :
-         d > 220000? '#8c96c6' :
-         d > 180000? '#9ebcda' :
-         d > 120000 ? '#bfd3e6' :
-         d > 85000 ? '#edf8fb' :
+  return d > 300000? '#810f7c' :
+        
+         d > 230000? '#88419d' :
+         d > 190000? '#8c96c6' :
+         d > 120000 ? '#9ebcda' :
+         d > 80000 ? '#bfd3e6' :
+         d > 50000 ? '#edf8fb' :
          d > 0 ? '#feebe2' :
                    'white' ;
 }
@@ -90,7 +91,7 @@ info.onAdd = function (map) {
 info.update = function (props) {
   var winName =
   this._div.innerHTML = (props ?
-    '<div class="areaName">' + props.ZIP_Code + '</div>' : '<div class="areaName faded"><small>Hover over areas<br>Click tabs or arrow keys</small></div>') + '<div class="areaLabel"><div class="areaValue"> Median home price <br> (single-family residences)</div>' +(props ? '$' + (checkNull(props["index" + year])) : '--') + '</div>';
+    '<div class="areaName">' + props.ZIP_Code + '</div>' : '<div class="areaName faded"><small>Hover over areas<br>Click tabs or arrow keys</small></div>') + '<div class="areaLabel"><div class="areaValue"> Zillow Housing Value Index: <b>single-family homes</b></div>' +(props ? '$' + (checkNull(props["index" + year])) : '--') + '</div>';
 };
 info.addTo(map);
 
@@ -104,11 +105,10 @@ $(".tabItem").click(function() {
 });
 
 // Edit grades in legend to match the range cutoffs inserted above
-// In this example, the last grade will appear as "2+"
 var legend = L.control({position: 'bottomright'});
 legend.onAdd = function (map) {
   var div = L.DomUtil.create('div', 'info legend'),
-    grades = [85000, 120000, 180000, 220000, 250000,300000],
+    grades = [50000, 80000, 120000, 190000, 230000,300000],
     labels = [],
     from, to;
   for (var i = 0; i < grades.length; i++) {
