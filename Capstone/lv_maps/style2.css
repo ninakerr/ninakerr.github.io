@@ -12,7 +12,7 @@
     height: 500px;
 }
 .tabBar {
-    font: 14px/16px Arial, Helvetica, sans-serif;
+    font: 14px/16px Helvetica, sans-serif;
 }
 /* Edit width based on number of tabs to display
 In this example, width = 9% for 10 tabs + cell borders */
@@ -28,7 +28,7 @@ In this example, width = 9% for 10 tabs + cell borders */
     font-size: 15px;
     font-weight: normal;
     text-transform: uppercase;
-    color: #ccc;
+    color: #6e016b;
 }
 .tabItem:first-child {
     border-radius: 7px 0px 0 7px;
@@ -42,16 +42,16 @@ In this example, width = 9% for 10 tabs + cell borders */
     border-right: 1px solid #aaa;
 }
 .tabItem:hover {
-    color: #E34B4B;
+    color: #6e016b;
 }
 .tabItem.selected {
-    color: maroon;
+    color: black;
     background: #eee;
     box-shadow: inset 1px 1px 7px -2px #555;
     color: white !important;
     font-weight: 400;
-    border: 1px solid #E34B4B !important;
-    background: #E34B4B !important;
+    border: 1px solid #8c6bb1 !important;
+    background: #bdbdbd !important;
     pointer-events: none;
 }
 /*Edit width of info box */
