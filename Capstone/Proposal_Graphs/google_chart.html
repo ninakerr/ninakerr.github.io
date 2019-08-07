@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<div id="chart_div"></div>
+<br/>
+<script>
+  google.charts.load('current', {
+        'packages': ['bar']
+      });
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Market Cycles', 'Least Recovery', 'Average Recovery', 'Most Recovery'],
+          ['Growth (2001-2006)', 0.91, 1.10, 1.02],
+          ['Decline (2006-2012)', -0.51, -0.56, -0.68],
+          ['Recovery (2012-2018)', 0.74, 0.96, 1.66],
+          ['All Years (2001-2018)', 0.59, 0.77, 0.68]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Percent change in home value 2001-2018',
+            // subtitle: 'Percent change in home value 2001-2018',
+          },
+          bars: 'horizontal', // Required for Material Bar Charts.
+          hAxis: {
+            format: 'percent',
+            scaleType: 'mirrorLog'
+          },
+          height: 400,
+          colors: ['#ec8f6a', '#ef4b4b', '#7ecfc0']
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('chart_div'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+
+        // var btns = document.getElementById('btn-group');
+
+        // btns.onclick = function(e) {
+
+        //   if (e.target.tagName === 'BUTTON') {
+        //     options.hAxis.format = e.target.id === 'none' ? '' : e.target.id;
+        //     chart.draw(data, google.charts.Bar.convertOptions(options));
+        //   }
+        // }
+      }
+</script>
