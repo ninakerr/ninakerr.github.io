@@ -5,7 +5,7 @@ var tabs = 4;
 // Edit the center point and zoom level
 var map = L.map('map', {
   center: [36.16, -115.1],
-  zoom: 9.5,
+  zoom: 9.4,
   scrollWheelZoom: false
 });
 
