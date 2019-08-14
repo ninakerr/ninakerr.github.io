@@ -450,7 +450,7 @@ map.addControl(new mapboxgl.NavigationControl({ position:'top-left'}));
 
     var popup = new mapboxgl.Popup({closeonClick: true})
           .setLngLat(currentFeature.geometry.coordinates)
-          .setHTML('<h3><a href="' + currentFeature.properties.URL + '">' + currentFeature.properties.title + '</a></h3><h4>' + currentFeature.properties.blurb + '</p></h4>'+'<img src="'+ currentFeature.properties.image +'" style="width:200px;height:100px;">')
+          .setHTML('<h3>' +  currentFeature.properties.title + '</a></h3><h4>' + currentFeature.properties.blurb + '</p></h4>'+'<img src="'+ currentFeature.properties.image +'" style="width:200px;height:100px;">')
           .addTo(map);
   }
 
