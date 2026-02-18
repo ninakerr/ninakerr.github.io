@@ -10,8 +10,8 @@ https://github.com/RyanFitzgerald/devportfolio for the HTML, CSS, and JS templat
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My Portfolio</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
     <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -23,214 +23,247 @@ https://github.com/RyanFitzgerald/devportfolio for the HTML, CSS, and JS templat
         <i class="fa fa-bars" aria-hidden="true"></i>
     </div>
     <!-- End #mobile-menu-toggle -->
-
     <header>
         <div id="mobile-menu-close">
             <span>Close</span> <i class="fa fa-times" aria-hidden="true"></i>
         </div>
         <ul id="menu" class="shadow">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li>
+                <a href="#about">About</a>
+            </li>
+            <li>
+                <a href="#experience">Experience</a>
+            </li>
+            <li>
+                <a href="#education">Education</a>
+            </li>
+            <li>
+                <a href="#projects">Projects</a>
+            </li>
+            <li>
+                <a href="#skills">Skills</a>
+            </li>
+            <li>
+                <a href="#contact">Contact</a>
+            </li>
         </ul>
     </header>
     <!-- End header -->
 
     <div id="lead">
-        <div id="lead-content" class="text-center">
+        <div id="lead-content">
             <h1>Nina Kerr</h1>
             <h2>Technical Training and GIS Professional</h2>
+           
         </div>
         <!-- End #lead-content -->
+
         <div id="lead-overlay"></div>
+
         <div id="lead-down">
-            <span><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+            <span>
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </span>
         </div>
         <!-- End #lead-down -->
     </div>
     <!-- End #lead -->
+<div id="about" class="py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- Heading -->
+            <div class="col-md-4 text-md-right text-center mb-3 mb-md-0">
+                <h2 class="heading">About Me</h2>
+            </div>
 
-    <!-- About Section -->
-    <div id="about" class="py-5">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Heading -->
-                <div class="col-md-4 text-md-right text-center mb-3 mb-md-0">
-                    <h2 class="heading">About Me</h2>
-                </div>
-                <!-- Content -->
-                <div class="col-md-8">
-                    <p>
-                        I’m a technical training and GIS professional with 10+ years of experience in training, instructional design, and spatial analysis. Currently, as Lead Technical Training Specialist at Kaseware, I develop and deliver programs that help users adopt complex case management technologies. Previously, I was a Senior Instructor at Esri, delivering virtual and in-person ArcGIS training and collaborating with product teams. I also worked as a GIS Analyst at Earth Economics and served as a Loadmaster in the U.S. Air Force. I hold an MS in Geospatial Technology and a BA in Sustainable Urban Development, and I’m passionate about blending technical expertise with instructional design to transform learning experiences.
-                    </p>
-                </div>
+            <!-- Content -->
+            <div class="col-md-8">
+                <p>
+                    I’m a technical training and GIS professional with 10+ years of experience in training, instructional design, and spatial analysis. Currently, as Lead Technical Training Specialist at Kaseware, I develop and deliver programs that help users adopt complex case management technologies. Previously, I was a Senior Instructor at Esri, delivering virtual and in-person ArcGIS training and collaborating with product teams. I also worked as a GIS Analyst at Earth Economics and served as a Loadmaster in the U.S. Air Force. I hold an MS in Geospatial Technology and a BA in Sustainable Urban Development, and I’m passionate about blending technical expertise with instructional design to transform learning experiences.
+                </p>
             </div>
         </div>
-    </div>
-    <!-- End #about -->
-
-   <!-- Experience Section -->
-<div id="experience" class="background-alt py-5">
-    <div class="container">
-        <h2 class="heading text-center mb-5">Experience</h2>
-
-        <ul class="timeline">
-            <!-- Kaseware -->
-            <li>
-                <div class="timeline-badge">2024 – Present</div>
-                <div class="timeline-panel">
-                    <h3>Kaseware</h3>
-                    <h4>Lead Technical Trainer</h4>
-                    <p>
-                        Designed and delivered comprehensive training programs for Kaseware software, ensuring effective knowledge transfer and high user proficiency. Created tailored training modules, including hands-on labs, e-learning courses, and interactive workshops. Provided expert guidance to trainees and led end-to-end training programs from needs assessment to post-training evaluation.
-                    </p>
-                </div>
-            </li>
-
-            <!-- Esri -->
-            <li>
-                <div class="timeline-badge">2019 – 2024</div>
-                <div class="timeline-panel">
-                    <h3>Esri</h3>
-                    <h4>Senior Instructor</h4>
-                    <p>
-                        Delivered virtual and in-person ArcGIS training to diverse clients. Collaborated with product and curriculum teams, adapted training to evolving GIS technologies, and maintained high student retention with consistently positive feedback.
-                    </p>
-                </div>
-            </li>
-
-            <!-- Earth Economics -->
-            <li>
-                <div class="timeline-badge">2017 – 2019</div>
-                <div class="timeline-panel">
-                    <h3>Earth Economics</h3>
-                    <h4>GIS Analyst</h4>
-                    <p>
-                        Analyzed spatial data, designed digital maps, developed mapping applications, and produced report-quality maps. Consulted with clients to deliver high-quality, project-specific solutions.
-                    </p>
-                </div>
-            </li>
-
-            <!-- USAF -->
-            <li>
-                <div class="timeline-badge">2012 – 2016</div>
-                <div class="timeline-panel">
-                    <h3>United States Air Force</h3>
-                    <h4>Loadmaster</h4>
-                    <p>
-                        Performed loadmaster air crew functions, ensured passenger and troop safety, and supervised all loadmaster activities and related functions.
-                    </p>
-                </div>
-            </li>
-        </ul>
     </div>
 </div>
-<!-- End #experience -->
 
+    <!-- End #about -->
 
-    <!-- Education Section -->
-    <div id="education" class="py-5">
-        <div class="container">
-            <h2 class="heading text-center mb-4">Education</h2>
-
-            <div class="education-block mb-4">
-                <h3>University of Washington</h3>
-                <h4>Bachelor of Arts in Sustainable Urban Development</h4>
+    <div id="experience" class="background-alt">
+        <h2 class="heading">Experience</h2>
+        <div id="experience-timeline">
+			   <div data-date="2024 – present">
+                <h3>Kaseware</h3>
+                <h4>Lead Technical Trainer</h4>
+                <p>
+					Designed and delivered comprehensive training programs for Kaseware software, ensuring effective knowledge transfer and high user proficiency across various levels. Created tailored training modules, including hands-on labs, e-learning courses, and interactive workshops, to address specific needs of diverse client groups and internal teams. Provided expert guidance and support to trainees, leveraging deep understanding of Kaseware's functionalities to enhance learning experiences and resolve complex issues in real-time. Led end-to-end training programs, from needs assessment and curriculum design to delivery and post-training evaluation, ensuring alignment with organizational goals and maximizing learner engagement.
             </div>
-
-            <div class="education-block mb-4">
-                <h3>University of Washington</h3>
-                <h4>Certificate - Geographic Information Systems</h4>
+			    <div data-date="2019 – 2024">
+                <h3>ESRI</h3>
+                <h4>Senior Instructor</h4>
+                <p>
+	Successfully delivered Esri software courses to a diverse clientele, ensuring their proficiency in the latest GIS technology. Designed and executed dynamic training sessions, empowering students to maximize the potential of geospatial applications anddata analysis. Spearheaded course development efforts, created customized training materials and hands-on exercises to meet client needs. Maintained an exceptional student retention rate, received consistently positive feedback for instructional excellence. Adapted to the evolving landscape of GIS technology, staying current with industry trends to deliver relevant and up-to-date training.
             </div>
-
-            <div class="education-block mb-4">
-                <h3>University of Washington</h3>
-                <h4>Master of Science in Geospatial Technologies</h4>
-                <p>Read more about this program <a href="http://www.tacoma.uw.edu/urban-studies/ms-program-overview">here</a>.</p>
-            </div>
-
-            <div class="education-block mb-4">
-                <h3>CompTIA</h3>
-                <h4>CompTIA Certified Technical Trainer (CTT+)</h4>
+            <div data-date="2017 – 2019">
+                <h3>Earth Economics</h3>
+                <h4>GIS Analyst</h4>
+                <p>
+	Analyzed spatial data through the use of
+mapping software. Discovered patterns and
+trends through spatial mapping of data.
+Designing digital maps. Developed mapping
+applications and tools. Produced report quality
+maps to be integrated into Earth Economics’
+printed and online materials. Developed high
+quality research and project-specific solutions.
+Consulted with clients to determine project
+needs.
+                </p>
+    
+   </div>
+            <div data-date="2012 – 2016">
+                <h3>United States Air Force</h3>
+                <h4>Loadmaster</h4>
+                <p>
+                  Performed loadmaster air crew functions,
+	provided for safety of passengers and troops,
+	supervised loadmaster activities and related
+	functions.
+                </p>
             </div>
         </div>
+    </div>
+    <!-- End #experience -->
+
+    <div id="education">
+        <h2 class="heading">Education</h2>
+        <div class="education-block">
+            <h3>University of Washington</h3>
+            <span class="education-date"></span>
+            <h4>Bachelor of Arts in Sustainable Urban Development</h4>
+            <p>
+        
+            </p>
+        </div>
+        <div class="education-block">
+            <h3>University of Washington</h3>
+            <span class="education-date"></span>
+            <h4>Certificate - Geographic Information Systems</h4>
+            <p></div>
+		
+
+        <div class="education-block">
+            <h3>University of Washington</h3>
+            <span class="education-date"></span>
+            <h4>Master of Science in Geospatial Technologies</h4>
+            <p>
+            Read more about this program <a href= "http://www.tacoma.uw.edu/urban-studies/ms-program-overview"> here </a>
+	    </p>
+        </div>
+		  </div>
+        <div class="education-block">
+            <h3>CompTIA</h3>
+            <span class="education-date"></span>
+            <h4>CompTIA Certified Technical Trainer (CTT+)</h4>
+            <p></div>
+
+        <!-- End .education-block -->
     </div>
     <!-- End #education -->
 
-    <!-- Projects Section -->
-    <div id="projects" class="background-alt py-5">
+    <div id="projects" class="background-alt">
+        <h2 class="heading">Projects</h2>
         <div class="container">
-            <h2 class="heading text-center mb-4">Projects</h2>
             <div class="row">
-                <div class="project shadow-large col-md-6 mb-4">
-                    <div class="project-image mb-2">
-                        <img src="images/icon.png" class="img-fluid" alt="Project Image"/>
+                <div class="project shadow-large">
+                    <div class="project-image">
+                        <img src="images/icon.png" height="300px" width="250px"/><p></p>
                     </div>
+                
+                    <!-- End .project-image -->
                     <div class="project-info">
-                        <h3><a href="Lab_5/lab5.html">Storymap - Las Vegas</a></h3>
-                        <h3><a href="Lab_4_2/page/index.html">Hiking Ruggedness using TPI</a></h3>
-                        <h3><a href="report/index.html">Webmap list example</a></h3>
-                        <h3><a href="WorldCarto/time_home.html">Time, Space, and Travel Cartogram</a></h3>
-                        <h3><a href="Capstone/Capstone_pres/index.html">Uneven Recovery: MSGT Capstone Project</a></h3>
+                     <!--    <h3> <a href="Lab_2/lab2.html"> Google Maps </a></h3>
+                        <p>
+                        <h3> <a href="Lab_3/Leaflet_lab/index2.html"> Leaflet </a></h3>
+                        
+                        <h3> <a href="Lab_4/lab4_test.html"> Mapbox </a></h3> -->
+			<h3> <a href="Lab_5/lab5.html"> Storymap - Las Vegas </a></h3>
+            <h3> <a href="Lab_4_2/page/index.html">Hiking Ruggedness using TPI</a></h3>
+            <h3> <a href="report/index.html"> Webmap list example</a></h3>
+            <h3> <a href="WorldCarto/time_home.html"> Time, Space, and Travel Cartogram</a></h3>
+            <h3> <a href="Capstone/Capstone_pres/index.html"> Uneven Recovery: MSGT Capstone Project</a></h3>
+                           
+                        </p>
+        
                     </div>
+                    <!-- End .project-info -->
                 </div>
+          
+
+               
+                 
+                </div>
+                <!-- End .project -->
             </div>
         </div>
     </div>
     <!-- End #projects -->
 
-    <!-- Skills Section -->
-    <div id="skills" class="py-5">
-        <div class="container">
-            <h2 class="heading text-center mb-4">Skills</h2>
-            <ul class="list-inline text-center">
-                <li class="list-inline-item">Esri Suite</li>
-                <li class="list-inline-item">Microsoft Suite</li>
-                <li class="list-inline-item">QGIS</li>
-                <li class="list-inline-item">OpenStreetMap</li>
-                <li class="list-inline-item">Data Analysis</li>
-                <li class="list-inline-item">Research</li>
-                <li class="list-inline-item">Project Management</li>
-                <li class="list-inline-item">Tableau</li>
-                <li class="list-inline-item">Data Visualization</li>
-                <li class="list-inline-item">Cartography</li>
-            </ul>
-        </div>
+    <div id="skills">
+        <h2 class="heading">Skills</h2>
+        <ul>
+            <li>Esri Suite</li>
+            <li>Microsoft Suite</li>
+            <li>QGIS</li>
+            <li>OpenStreetMap</li>
+            <li>Data Analysis</li>
+            <li>Research</li>
+	    <li>Project Management</li>
+            <li>Tableau</li>
+            <li>Data Visualization</li>
+            <li>Cartography</li>
+         
+
+        </ul>
     </div>
     <!-- End #skills -->
 
-    <!-- Contact Section -->
-    <div id="contact" class="py-5">
-        <div class="container">
-            <h2 class="heading text-center mb-4">Get in Touch</h2>
-            <div id="contact-form" class="mx-auto" style="max-width:600px;">
-                <form method="POST" action="https://formspree.io/nkerr0803@gmail.com">
-                    <input type="hidden" name="_subject" value="Contact request from personal website" />
-                    <input type="email" name="_replyto" placeholder="Your email" required class="form-control mb-2">
-                    <textarea name="message" placeholder="Your message" required class="form-control mb-2"></textarea>
-                    <button type="submit" class="btn btn-primary btn-block">Send</button>
-                </form>
-            </div>
+    <div id="contact">
+        <h2>Get in Touch</h2>
+        <div id="contact-form">
+            <form method="POST" action="https://formspree.io/nkerr0803@gmail.com">
+                <input type="hidden" name="_subject" value="Contact request from personal website" />
+                <input type="email" name="_replyto" placeholder="Your email" required>
+                <textarea name="message" placeholder="Your message" required></textarea>
+                <button type="submit">Send</button>
+            </form>
         </div>
+        <!-- End #contact-form -->
     </div>
     <!-- End #contact -->
 
-    <footer class="py-3">
+    <footer>
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-sm-5 text-center text-sm-left">
-                    <p>&copy; 2026 Nina Kerr</p>
+            <div class="row">
+                <div class="col-sm-5 copyright">
+                    <p>
+                        Copyright &copy; 2017 Nina Kerr
+                    </p>
                 </div>
-                <div class="col-sm-2 text-center">
+                <div class="col-sm-2 top">
                     <span id="to-top">
                         <i class="fa fa-chevron-up" aria-hidden="true"></i>
                     </span>
                 </div>
-                <div class="col-sm-5 text-center text-sm-right">
-                    <a href="https://linkedin.com/in/kerrgis/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                <div class="col-sm-5 social">
+                    <ul>
+                 
+                        <li>
+                            <a href="https://linkedin.com/in/kerrgis/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        </li>
+                       
+                           
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
